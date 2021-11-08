@@ -16,13 +16,13 @@ function App() {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
+      {/* {isLoaded && (
         <Switch>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
         </Switch>
-      )}
+      )} */}
     </>
 );
 }

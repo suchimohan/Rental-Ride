@@ -1,0 +1,33 @@
+.SignUpContainer{
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: auto;
+    width: 400px;
+}
+
+.SignUpForm {
+    display: flex;
+    flex-direction: column;
+    margin:20px;
+    gap : 10px;
+}
+
+input {
+    box-sizing:border-box;
+    width: 350px;
+}
+
+.signUpButtonDiv{
+    display: flex;
+    flex-direction: row;
+    gap : 20px;
+    justify-content: center;
+    margin: 20px;
+}
+
+.signUpButtons{
+    height:auto;
+    width:auto;
+    border-radius: 1em;
+    font-size: large;
+}
