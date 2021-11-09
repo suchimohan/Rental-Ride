@@ -19,3 +19,9 @@ a {
     flex-direction: row;
     gap: 20px;
 }
+
+.sessionDiv{
+    display: flex;
+    flex-direction: row;
+    gap:20px
+}
