@@ -1,6 +1,7 @@
 import './CarDetails.css'
+import { NavLink } from 'react-router-dom';
 
-const ProductDetail = ({name,model,price,image}) => {
+const CarDetails = ({id,name,model,price,image}) => {
 
     let image1 = ""
     if(image){
@@ -11,8 +12,9 @@ const ProductDetail = ({name,model,price,image}) => {
       <div className='car-detail'>
         <img className= 'carImage' src={image1} alt={name} />
         <span className='car-title'>{name}{model}</span>
-        <span>${price}</span>
+        <span>${price}/ day</span>
+        <NavLink to={`/car/${id}`}>View Details</NavLink>
       </div>
     );
   };
-  export default ProductDetail;
+  export default CarDetails;

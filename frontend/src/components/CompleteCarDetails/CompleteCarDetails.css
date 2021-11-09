@@ -1,0 +1,41 @@
+.complete-car-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.twoCarDiv{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.display-details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:20px;
+    margin: 40px;
+    font-size: 3em;
+}
+
+.edit-delete-car-buttons{
+    display: flex;
+    flex-direction: row;
+    gap:40px;
+}
+
+.edit-car-button {
+    height:3em;
+    width:5em;
+    border-radius: 1em;
+    font-size: large;
+}
+
+.delete-car-button {
+    height:3em;
+    width:5em;
+    border-radius: 1em;
+    font-size: large;
+}

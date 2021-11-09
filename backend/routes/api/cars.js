@@ -6,6 +6,12 @@ const { User, Car, Image, Address } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 
+function carNotFoundError (carId){
+    const err = new Error(`A car of the given ID ${carId} could not be found`);
+    err.title = "Car not found."
+    err.status = 404;
+    return err
+}
 
 router.get('/',asyncHandler(async function(req,res){
     const cars = await Car.findAll({
@@ -39,6 +45,23 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         price
     });
     return res.json(car);
+}))
+
+router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
+    console.log('//////////////////////')
+    const carId = req.params.id
+    const car = await Car.findAll({
+        where: {
+            id : carId
+        },
+        include: [{model: Image}]
+    })
+    if(car) {
+        return res.json(car);
+    } else {
+        let error = carNotFoundError(carId);
+        next(error)
+    }
 }))
 
 module.exports = router;
