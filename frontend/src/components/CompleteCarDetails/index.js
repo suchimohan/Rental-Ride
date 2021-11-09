@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {getAllCars} from "../../store/cars"
-import {useParams, Redirect} from 'react-router-dom'
+import {getAllCars, deleteCar} from "../../store/cars"
+import {useParams} from 'react-router-dom'
 import CarImage from './CarImage';
 import './CompleteCarDetails.css'
 
@@ -14,11 +14,18 @@ function CompleteCarDetails(){
     const oneCar = cars.find((car)=>+car.id === +id)
     // console.log(oneCar.Images)
 
+    const handleDelete = (id) => {
+        dispatch(deleteCar(id))
+    }
+
     useEffect(()=>{
         dispatch(getAllCars())
     },[dispatch])
 
-    // if (!oneCar) return (<Redirect to="/" />)
+    if (!oneCar) {
+        return null
+    }
+    else {
     return (
         <div className="complete-car-details">
             <div className="twoCarDiv">
@@ -39,10 +46,10 @@ function CompleteCarDetails(){
             </div>
             <div className="edit-delete-car-buttons">
                 <button type = "button" className="edit-car-button">Edit</button>
-                <button type = "button" className="delete-car-button">Delete</button>
+                <button type = "button" className="delete-car-button" onClick={()=>handleDelete(id)}>Delete</button>
             </div>
         </div>
     )
-}
+}}
 
 export default CompleteCarDetails

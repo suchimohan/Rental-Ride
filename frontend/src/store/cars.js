@@ -3,8 +3,7 @@ import { csrfFetch } from './csrf';
 
 const GET_CARS = 'cars/GET_CARS';
 const ADD_CAR = 'cars/ADD_CAR';
-// const GET_ONE_CAR = 'cars/GET_ONE_CAR';
-// const REMOVE
+const REMOVE_CAR = 'cars/REMOVE_CAR'
 
 const getCars = cars => ({
     type: GET_CARS,
@@ -16,10 +15,10 @@ const addCars = payload => ({
     payload
 })
 
-// const getCar = car => ({
-//     type: GET_ONE_CAR,
-//     car
-// })
+const removeCar = id => ({
+    type : REMOVE_CAR,
+    payload: id
+})
 
 // thunks
 
@@ -31,14 +30,6 @@ export const getAllCars = () => async (dispatch) => {
     }
 }
 
-// export const getOneCar = (id) => async (dispatch) => {
-//     const response = await fetch(`/api/cars/${id}`)
-//     if(response.ok) {
-//         const car = await response.json();
-//         dispatch(getCar(car))
-//     }
-// }
-
 export const addOneCar = (payload) => async (dispatch) => {
     const response = await csrfFetch('/api/cars',{
         method: "POST",
@@ -49,6 +40,16 @@ export const addOneCar = (payload) => async (dispatch) => {
         const newCar = await response.json();
         dispatch(addCars(newCar))
       }
+}
+
+export const deleteCar = id => async (dispatch) => {
+    const response = await csrfFetch(`/api/cars/${id}`, {
+        method : "DELETE",
+    })
+
+    if(response.ok) {
+        dispatch(removeCar(id))
+    }
 }
 
 // reducer
@@ -66,9 +67,10 @@ export const carReducer = (state={},action)=>{
         newState = {...state, [action.payload.id]: action.payload}
         return newState;
     }
-    // case GET_ONE_CAR:{
-    //     newState[action.car.id] = action.car
-    // }
+    case REMOVE_CAR:
+      newState = { ...state };
+      delete newState[action.payload];
+      return newState;
     default:
         return state;
     }

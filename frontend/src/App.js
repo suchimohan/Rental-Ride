@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import CarComponent from "./components/CarComponent"
 import CreateCar from "./components/CreateCar"
 import CompleteCarDetails from "./components/CompleteCarDetails";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
             <h2>Page Not Found</h2>
         </Route>
       </Switch>
+      {/* <Footer /> */}
     </>
 );
 }
