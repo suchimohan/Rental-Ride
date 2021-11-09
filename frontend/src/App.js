@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-// import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import CarComponent from "./components/CarComponent"
+import CreateCar from "./components/CreateCar"
 
 function App() {
   const dispatch = useDispatch();
@@ -16,13 +16,14 @@ function App() {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* {isLoaded && (
-        <Switch>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )} */}
+      <Switch>
+        <Route exact path='/'>
+          <CarComponent />
+        </Route>
+        <Route path="/create-car">
+          <CreateCar />
+        </Route>
+      </Switch>
     </>
 );
 }

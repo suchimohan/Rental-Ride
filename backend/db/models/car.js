@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     model: DataTypes.STRING,
-    numberOfSeates: DataTypes.INTEGER,
+    numberOfSeats: DataTypes.INTEGER,
     features: DataTypes.STRING,
     rules: DataTypes.STRING,
     fuelType: DataTypes.STRING,
@@ -13,8 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Car.associate = function(models) {
     // associations can be defined here
-    Car.belongsTo(models.User,{
-      foreignKey: 'userId'
+    // Car.belongsTo(models.User,{
+    //   foreignKey: 'userId'
+    // })
+    Car.hasMany(models.Image,{
+      foreignKey: 'carId'
     })
   };
   return Car;
