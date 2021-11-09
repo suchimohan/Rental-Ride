@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {getOneCar} from "../../store/cars"
+import {getAllCars} from "../../store/cars"
 import {useParams, Redirect} from 'react-router-dom'
 import CarImage from './CarImage';
 import './CompleteCarDetails.css'
@@ -15,14 +15,14 @@ function CompleteCarDetails(){
     // console.log(oneCar.Images)
 
     useEffect(()=>{
-        dispatch(getOneCar(id))
+        dispatch(getAllCars())
     },[dispatch])
 
     // if (!oneCar) return (<Redirect to="/" />)
     return (
         <div className="complete-car-details">
             <div className="twoCarDiv">
-                {oneCar.Images?.map(({id, imageURL})=>(
+                {oneCar?.Images.map(({id, imageURL})=>(
                     <CarImage
                         key={id}
                         url={imageURL}

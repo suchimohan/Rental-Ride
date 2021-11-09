@@ -3,7 +3,8 @@ import { csrfFetch } from './csrf';
 
 const GET_CARS = 'cars/GET_CARS';
 const ADD_CAR = 'cars/ADD_CAR';
-const GET_ONE_CAR = 'cars/GET_ONE_CAR';
+// const GET_ONE_CAR = 'cars/GET_ONE_CAR';
+// const REMOVE
 
 const getCars = cars => ({
     type: GET_CARS,
@@ -15,10 +16,10 @@ const addCars = payload => ({
     payload
 })
 
-const getCar = car => ({
-    type: GET_ONE_CAR,
-    car
-})
+// const getCar = car => ({
+//     type: GET_ONE_CAR,
+//     car
+// })
 
 // thunks
 
@@ -30,13 +31,13 @@ export const getAllCars = () => async (dispatch) => {
     }
 }
 
-export const getOneCar = (id) => async (dispatch) => {
-    const response = await fetch(`/api/cars/${id}`)
-    if(response.ok) {
-        const car = await response.json();
-        dispatch(getCar(car))
-    }
-}
+// export const getOneCar = (id) => async (dispatch) => {
+//     const response = await fetch(`/api/cars/${id}`)
+//     if(response.ok) {
+//         const car = await response.json();
+//         dispatch(getCar(car))
+//     }
+// }
 
 export const addOneCar = (payload) => async (dispatch) => {
     const response = await csrfFetch('/api/cars',{
@@ -65,9 +66,9 @@ export const carReducer = (state={},action)=>{
         newState = {...state, [action.payload.id]: action.payload}
         return newState;
     }
-    case GET_ONE_CAR:{
-        newState[action.car.id] = action.car
-    }
+    // case GET_ONE_CAR:{
+    //     newState[action.car.id] = action.car
+    // }
     default:
         return state;
     }

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { restoreUser } = require('../../utils/auth');
 const { User, Car, Image, Address } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -58,6 +58,51 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
     })
     if(car) {
         return res.json(car);
+    } else {
+        let error = carNotFoundError(carId);
+        next(error)
+    }
+}))
+
+router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+    const carId = req.params.id
+    const {
+        name,
+        model,
+        numberOfSeats,
+        features,
+        rules,
+        fuelType,
+        licensePlateNumber,
+        price
+    } = req.body
+
+    const car = await Car.findByPk(carId);
+
+    if(car) {
+        let newCar = await car.update({
+            name,
+            model,
+            numberOfSeats,
+            features,
+            rules,
+            fuelType,
+            licensePlateNumber,
+            price
+        })
+        return res.json(newCar)
+    } else {
+        let error = carNotFoundError(carId);
+        next(error)
+    }
+}))
+
+router.delete('/:id(\\d+)', asyncHandler(async function (req,res,next){
+    const carId = req.params.id
+    const car = await Car.findByPk(carId)
+    if(car){
+        await car.destroy();
+        res.status(204).end();
     } else {
         let error = carNotFoundError(carId);
         next(error)
