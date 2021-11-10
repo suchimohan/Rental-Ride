@@ -22,7 +22,7 @@ function CompleteCarDetails({isLoaded}){
 
 
     const oneCar = cars.find((car)=>+car.id === +id)
-    // console.log(oneCar.Images)
+
 
     let sessionLinks;
     if(sessionUser?.id === oneCar?.userId){

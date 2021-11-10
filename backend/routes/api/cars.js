@@ -80,7 +80,6 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
 }))
 
 router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
-    console.log('///////////////////////')
     const carId = req.params.id
     const {
         name,
