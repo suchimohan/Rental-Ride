@@ -72,7 +72,7 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
         include: [{model: Image}]
     })
     if(car) {
-        return res.json(car);
+        return res.json(car[0]);
     } else {
         let error = carNotFoundError(carId);
         next(error)
