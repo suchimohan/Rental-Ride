@@ -7,6 +7,7 @@ import CarComponent from "./components/CarComponent"
 import CreateCar from "./components/CreateCar"
 import CompleteCarDetails from "./components/CompleteCarDetails";
 import Footer from "./components/Footer";
+import EditCarDetails from "./components/EditCarDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/car/:id">
           <CompleteCarDetails />
+        </Route>
+        <Route path="/:id/edit">
+          <EditCarDetails />
         </Route>
         <Route path="/">
             <h2>Page Not Found</h2>

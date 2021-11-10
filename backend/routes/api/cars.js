@@ -21,7 +21,6 @@ router.get('/',asyncHandler(async function(req,res){
 }))
 
 router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(req,res){
-
     const { user } = req;
     const {
         name,
@@ -31,24 +30,40 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         rules,
         fuelType,
         licensePlateNumber,
-        price } = req.body
+        price,
+        image1,
+        image2 } = req.body
 
     const car = await Car.create({
         userId : user.id,
-        name,
-        model,
-        numberOfSeats,
-        features,
-        rules,
-        fuelType,
-        licensePlateNumber,
-        price
+        name :name ,
+        model : model,
+        numberOfSeats : numberOfSeats,
+        features : features,
+        rules : rules,
+        fuelType : fuelType,
+        licensePlateNumber : licensePlateNumber,
+        price : price,
     });
+
+    const newImage1 = await Image.create({
+        carId : car.id,
+        imageURL : image1
+    })
+
+    const newImage2 = await Image.create({
+        carId : car.id,
+        imageURL : image2
+    })
+
+    let Images = [newImage1,newImage2]
+
+    car[Images] = Images
+
     return res.json(car);
 }))
 
 router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
-    console.log('//////////////////////')
     const carId = req.params.id
     const car = await Car.findAll({
         where: {
@@ -65,6 +80,7 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
 }))
 
 router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+    console.log('///////////////////////')
     const carId = req.params.id
     const {
         name,
@@ -74,12 +90,18 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
         rules,
         fuelType,
         licensePlateNumber,
-        price
+        price,
+        image1,
+        image2
     } = req.body
 
     const car = await Car.findByPk(carId);
+    const oldImage = await Image.findAll({
+        where : {
+            carId: carId
+        }});
 
-    if(car) {
+    if(car && oldImage) {
         let newCar = await car.update({
             name,
             model,
@@ -90,6 +112,16 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
             licensePlateNumber,
             price
         })
+        let newImage1 = await oldImage[0].update({
+            imageURL : image1
+        })
+        let newImage2 = await oldImage[1].update({
+            imageURL : image2
+        })
+
+        let Images = [newImage1,newImage2]
+        newCar[Images] = Images
+
         return res.json(newCar)
     } else {
         let error = carNotFoundError(carId);

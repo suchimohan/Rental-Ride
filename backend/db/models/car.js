@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     //   foreignKey: 'userId'
     // })
     Car.hasMany(models.Image,{
-      foreignKey: 'carId'
+      foreignKey: 'carId',
+      onDelete: 'CASCADE',
+      hooks: true
     })
   };
   return Car;

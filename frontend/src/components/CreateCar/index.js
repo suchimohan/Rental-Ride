@@ -13,6 +13,8 @@ const CreateCar = () =>{
     const [fuelType, setFuelType] = useState('')
     const [licensePlateNumber,setLicensePlateNumber] = useState('')
     const [price,setPrice] = useState('')
+    const [image1,setImage1] = useState('')
+    const [image2,setImage2] = useState('')
 
 
     const dispatch = useDispatch();
@@ -28,7 +30,9 @@ const CreateCar = () =>{
             rules,
             fuelType,
             licensePlateNumber,
-            price
+            price,
+            image1,
+            image2
         }
     dispatch(addOneCar(payload));
     history.push('/')
@@ -84,6 +88,18 @@ const CreateCar = () =>{
                 onChange={(e)=>setPrice(e.target.value)}
                 value={price}
                 placeholder= "Price Per Hour"
+                required
+                />
+                <input
+                onChange={(e)=>setImage1(e.target.value)}
+                value={image1}
+                placeholder= "Car Image URL"
+                required
+                />
+                <input
+                onChange={(e)=>setImage2(e.target.value)}
+                value={image2}
+                placeholder= "Car Image URL"
                 required
                 />
                 <button className='submit-button' type='submit'>

@@ -16,7 +16,7 @@ const CarComponent = () => {
     return (
         <div>
             <div className="h2tag">
-             <h2>FIND YOUR PERFECT CAR</h2>
+             <h2>FIND YOUR PERFECT RIDE</h2>
             </div>
             <div className='displayCars'>
                 {cars?.map(({id,name,model,price,Images})=>(

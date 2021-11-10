@@ -2,21 +2,27 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {getAllCars, deleteCar} from "../../store/cars"
-import {useParams} from 'react-router-dom'
+import {NavLink, useParams} from 'react-router-dom'
 import CarImage from './CarImage';
 import './CompleteCarDetails.css'
+import { useHistory } from "react-router";
+
+
 
 function CompleteCarDetails(){
     const cars = useSelector((state)=> Object.values(state.car))
     const {id} = useParams()
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const oneCar = cars.find((car)=>+car.id === +id)
     // console.log(oneCar.Images)
 
     const handleDelete = (id) => {
         dispatch(deleteCar(id))
+        history.push('/')
     }
+
 
     useEffect(()=>{
         dispatch(getAllCars())
@@ -29,7 +35,7 @@ function CompleteCarDetails(){
     return (
         <div className="complete-car-details">
             <div className="twoCarDiv">
-                {oneCar?.Images.map(({id, imageURL})=>(
+                {oneCar.Images.map(({id, imageURL})=>(
                     <CarImage
                         key={id}
                         url={imageURL}
@@ -45,7 +51,9 @@ function CompleteCarDetails(){
                 <span>Price: ${oneCar.price}/ day</span>
             </div>
             <div className="edit-delete-car-buttons">
-                <button type = "button" className="edit-car-button">Edit</button>
+                <NavLink to={`/${id}/edit`}>
+                   <button type="button" className="edit-car-button">Edit</button>
+                </NavLink>
                 <button type = "button" className="delete-car-button" onClick={()=>handleDelete(id)}>Delete</button>
             </div>
         </div>
