@@ -1,0 +1,38 @@
+.edit-car{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.submit-button{
+  color: black;
+  font-weight: bold;
+  padding: 0 5px 0 5px;
+  height: 40px;
+  width: 350px;
+
+}
+
+
+.edit-Car-Div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    height: 40px;
+    width: 350px;
+    box-sizing:border-box;
+    border: 1px solid #999;
+    padding: 1em;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+    font-weight: bold;
+    font-size:20px;
+}

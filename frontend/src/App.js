@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-// import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import CarComponent from "./components/CarComponent"
+import CreateCar from "./components/CreateCar"
+import CompleteCarDetails from "./components/CompleteCarDetails";
+// import Footer from "./components/Footer";
+import EditCarDetails from "./components/EditCarDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,13 +19,24 @@ function App() {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
+      <Switch>
+        <Route exact path='/'>
+          <CarComponent />
+        </Route>
+        <Route path="/create-car">
+          <CreateCar />
+        </Route>
+        <Route path="/car/:id">
+          <CompleteCarDetails isLoaded={isLoaded}/>
+        </Route>
+        <Route path="/:id/edit">
+          <EditCarDetails />
+        </Route>
+        <Route path="/">
+            <h2>Page Not Found</h2>
+        </Route>
+      </Switch>
+      {/* <Footer /> */}
     </>
 );
 }

@@ -1,0 +1,13 @@
+.footer {
+    border-top: 1px solid lightgray;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.footer > p {
+    padding: 5px;
+    font-size: 14px;
+}
