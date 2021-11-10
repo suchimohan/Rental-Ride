@@ -12,8 +12,10 @@ const CarDetails = ({id,name,model,price,image}) => {
       <div className='car-detail'>
         <img className= 'carImage' src={image1} alt={name} />
         <span className='car-title'>{name}{model}</span>
-        <span>${price}/ day</span>
-        <NavLink to={`/car/${id}`}>View Details</NavLink>
+        <span className='car-title'>${price}/ day</span>
+        <div className="viewNav">
+          <NavLink to={`/car/${id}`}>View Details</NavLink>
+        </div>
       </div>
     );
   };

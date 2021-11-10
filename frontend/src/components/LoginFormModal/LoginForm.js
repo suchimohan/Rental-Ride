@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import './LoginForm.css'
-// import SignUpFormModal from '../SignUpFormModal';
+
 
 function LoginForm({modalState}) {
   const dispatch = useDispatch();
@@ -48,10 +48,6 @@ function LoginForm({modalState}) {
         <div className = "loginButtonDiv">
         <button type="submit" className ="loginButtons">Log In</button>
         <button type="button" className ="loginButtons" onClick={() => modalState(false)}>Cancel</button>
-        </div>
-        <div className="footerDiv">
-        <div>Don't have an account</div>
-        <button type="button" className ="loginButtons">Sign Up</button>
         </div>
       </form>
     </div>

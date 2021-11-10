@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import CarComponent from "./components/CarComponent"
 import CreateCar from "./components/CreateCar"
 import CompleteCarDetails from "./components/CompleteCarDetails";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import EditCarDetails from "./components/EditCarDetails";
 
 function App() {
@@ -19,9 +19,6 @@ function App() {
   return isLoaded && (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* <div className="Main image">
-        <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/living-the-dream-aldona-pivoriene.jpg" alt="car"/>
-      </div> */}
       <Switch>
         <Route exact path='/'>
           <CarComponent />
@@ -30,7 +27,7 @@ function App() {
           <CreateCar />
         </Route>
         <Route path="/car/:id">
-          <CompleteCarDetails />
+          <CompleteCarDetails isLoaded={isLoaded}/>
         </Route>
         <Route path="/:id/edit">
           <EditCarDetails />

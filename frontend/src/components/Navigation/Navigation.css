@@ -1,6 +1,7 @@
 .navigation{
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     list-style: none;
     background:#D8E2DC;
     padding: 20px;
@@ -21,11 +22,11 @@ a:hover{
 .navigationLinks {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 50px;
 }
 
 .sessionDiv{
     display: flex;
     flex-direction: row;
-    gap:20px
+    gap:50px
 }

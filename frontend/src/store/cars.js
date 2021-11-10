@@ -5,10 +5,16 @@ const GET_CARS = 'cars/GET_CARS';
 const ADD_CAR = 'cars/ADD_CAR';
 const REMOVE_CAR = 'cars/REMOVE_CAR';
 const EDIT_CAR = 'cars/EDIT_CAR';
+const GET_CAR  = 'cars/GET_CAR';
 
 const getCars = cars => ({
     type: GET_CARS,
     cars
+})
+
+const getCar = car => ({
+    type: GET_CAR,
+    car
 })
 
 const addCars = payload => ({
@@ -33,6 +39,14 @@ export const getAllCars = () => async (dispatch) => {
     if (response.ok) {
         const cars = await response.json();
         dispatch(getCars(cars))
+    }
+}
+
+export const getOneCar = (id) => async (dispatch) => {
+    const response = await fetch(`/api/cars/${id}`);
+    if (response.ok) {
+        const car = await response.json();
+        dispatch(getCar(car))
     }
 }
 
@@ -80,6 +94,10 @@ export const carReducer = (state={},action)=>{
             newState[car.id] = car
         })
         return newState;
+    }
+    case GET_CAR:{
+        newState[action.car.id] = action.car;
+        return newState
     }
     case ADD_CAR:{
         newState = {...state, [action.payload.id]: action.payload}

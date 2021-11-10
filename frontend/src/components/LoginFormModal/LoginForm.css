@@ -32,10 +32,3 @@ input {
     font-size: large;
 }
 
-.footerDiv{
-    display: flex;
-    flex-direction: row;
-    gap : 20px;
-    justify-content: center;
-    margin: 10px;
-}
