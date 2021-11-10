@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {getOneCar, deleteCar} from "../../store/cars"
+import { getAllReviews } from '../../store/reviews';
 import {NavLink, useParams} from 'react-router-dom'
 import CarImage from './CarImage';
 import './CompleteCarDetails.css'
@@ -12,13 +13,15 @@ import { useHistory } from "react-router";
 function CompleteCarDetails({isLoaded}){
     const sessionUser = useSelector(state => state.session.user)
     const cars = useSelector((state)=> Object.values(state.car))
+    // const reviews = useSelector((state)=>Object.values(state.review))
     const {id} = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(()=>{
         dispatch(getOneCar(id))
-    },[dispatch])
+        dispatch(getAllReviews())
+    },[dispatch,id])
 
 
     const oneCar = cars.find((car)=>+car.id === +id)

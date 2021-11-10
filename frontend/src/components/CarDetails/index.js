@@ -5,7 +5,7 @@ const CarDetails = ({id,name,model,price,image}) => {
 
     let image1 = ""
     if(image){
-        image1 = image[0].imageURL
+        image1 = image[0]?.imageURL
     }
 
     return (

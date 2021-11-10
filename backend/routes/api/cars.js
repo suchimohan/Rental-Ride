@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { restoreUser } = require('../../utils/auth');
-const { User, Car, Image, Address } = require('../../db/models');
+const { User, Car, Image, Address, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 
@@ -15,7 +15,8 @@ function carNotFoundError (carId){
 
 router.get('/',asyncHandler(async function(req,res){
     const cars = await Car.findAll({
-        include: [{model: Image}]
+        include: [{model: Image},
+                  {model: User}]
     })
     return res.json(cars);
 }))
@@ -69,7 +70,8 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
         where: {
             id : carId
         },
-        include: [{model: Image}]
+        include: [{model: User},
+                 {model:Image}]
     })
     if(car) {
         return res.json(car[0]);
