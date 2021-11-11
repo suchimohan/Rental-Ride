@@ -21,8 +21,8 @@ const AddReviewForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = {
-            content,
-            id
+            content : content,
+            carId : id
         }
         dispatch(addOneReview(payload));
         history.push(`/car/${id}`)

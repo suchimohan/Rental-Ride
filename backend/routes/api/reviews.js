@@ -5,13 +5,21 @@ const { User, Car, Image, Address, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 const { restoreUser } = require('../../utils/auth');
 
-function reviewNotFoundError (carId){
-    const err = new Error(`No reviews found for given carId ${carId}`);
+function reviewNotFoundError (){
+    const err = new Error(`No reviews found`);
     err.title = "Review not found."
     err.status = 404;
     return err
 }
 
+// router.get('/',asyncHandler(async function(req,res){
+//     const reviews = await Review.findAll({
+//         include: [{model:User}]
+//     })
+//     return res.json(reviews);
+// }))
+
+//fix the route path
 router.get('/:id(\\d+)',asyncHandler(async function(req,res,next){
     const carId = req.params.id
     const reviews = await Review.findAll({
@@ -23,7 +31,7 @@ router.get('/:id(\\d+)',asyncHandler(async function(req,res,next){
     if(reviews) {
     return res.json(reviews);
     } else {
-        let error = reviewNotFoundError(carId);
+        let error = reviewNotFoundError();
         next(error)
     }
 }))
@@ -32,15 +40,44 @@ router.post('/',handleValidationErrors,restoreUser,asyncHandler(async function(r
     const {user} = req;
     const {
         content,
-        id
+        carId //carid
     } = req.body
     const review = await Review.create({
         userId : user.id,
-        carId : id,
+        carId : carId,
         content : content
     })
 
     return res.json(review);
+}))
+
+router.put('/:id(\\d+)',asyncHandler(async (req,res,next) => {
+    const reviewId = req.params.id
+    const {
+        content
+    } = req.body
+    const review = await Review.findByPk(reviewId);
+    if(review) {
+        let newReview = await review.update({
+            content
+        })
+        return res.json(newReview)
+    } else {
+        let error = reviewNotFoundError();
+        next(error)
+    }
+}))
+
+router.delete('/:id(\\d+)', asyncHandler(async function (req,res,next){
+    const reviewId = req.params.id
+    const review = await Review.findByPk(reviewId)
+    if(review){
+        await review.destroy();
+        res.status(204).end();
+    } else {
+        let error = reviewNotFoundError();
+        next(error)
+    }
 }))
 
 module.exports = router;

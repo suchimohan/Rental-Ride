@@ -24,7 +24,6 @@ function CompleteCarDetails(){
     },[dispatch,id])
 
     const reviews = useSelector((state)=>Object.values(state.review))
-    console.log(reviews)
 
     const oneCar = cars.find((car)=>+car.id === +id)
 
@@ -93,9 +92,11 @@ function CompleteCarDetails(){
                 <h2>Reviews</h2>
                 {addReview}
                 <div className="review_render_div">
-                {reviews?.map(({id,content,User})=>(
+                {reviews?.map(({id,carId,content,User})=>(
                     <Reviews
                         key={id}
+                        reviewId={id}
+                        carId = {carId}
                         content={content}
                         user ={User}
                     />
