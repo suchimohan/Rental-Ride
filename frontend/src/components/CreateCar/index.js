@@ -20,6 +20,10 @@ const CreateCar = () =>{
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const handleCancel = () => {
+        history.push('/')
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = {
@@ -104,6 +108,9 @@ const CreateCar = () =>{
                 />
                 <button className='submit-button' type='submit'>
                     Publish
+                </button>
+                <button className='submit-button' type='submit' onClick={()=>{handleCancel()}}>
+                    Cancel
                 </button>
             </form>
         </div>

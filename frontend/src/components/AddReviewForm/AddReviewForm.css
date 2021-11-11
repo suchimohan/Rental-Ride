@@ -1,0 +1,27 @@
+.add_review{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.addReviewForm{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.edit_submit_button {
+  color: black;
+  font-size: large;
+  padding: 0 5px 0 5px;
+  height: 40px;
+  width: 350px;
+  background-color: #D8E2DC;
+}
+
+textarea{
+    width : 350px;
+    height: 300px;
+    box-sizing: border-box;
+}
