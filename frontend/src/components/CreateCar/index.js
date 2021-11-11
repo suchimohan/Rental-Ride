@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux"
 import { useHistory } from "react-router";
 import {addOneCar} from "../../store/cars";
@@ -24,7 +24,7 @@ const CreateCar = () =>{
         history.push('/')
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             name,
@@ -38,8 +38,11 @@ const CreateCar = () =>{
             image1,
             image2
         }
-    dispatch(addOneCar(payload));
-    history.push('/')
+
+    let createdCar = await dispatch(addOneCar(payload));
+    if (createdCar) {
+    history.push(`/car/${createdCar.id}`);
+    }
     }
 
     return (

@@ -20,14 +20,15 @@ function reviewNotFoundError (){
 // }))
 
 //fix the route path
-router.get('/:id(\\d+)',asyncHandler(async function(req,res,next){
-    const carId = req.params.id
+router.get('/car/:carId(\\d+)',asyncHandler(async function(req,res,next){
+    const carId = req.params.carId
     const reviews = await Review.findAll({
         where : {
             carId : carId
         },
         include: [{model: User}]
     })
+    // console.log(reviews)
     if(reviews) {
     return res.json(reviews);
     } else {
@@ -45,10 +46,20 @@ router.post('/',handleValidationErrors,restoreUser,asyncHandler(async function(r
     const review = await Review.create({
         userId : user.id,
         carId : carId,
-        content : content
+        content : content,
     })
 
-    return res.json(review);
+    // console.log("//////////////////////////////")
+    // console.log(review.id)
+
+    const newReview = await Review.findAll({
+        where : {
+            id : review.id
+        },
+        include : [{model:User}]
+    })
+
+    return res.json(newReview[0]);
 }))
 
 router.put('/:id(\\d+)',asyncHandler(async (req,res,next) => {
@@ -56,12 +67,21 @@ router.put('/:id(\\d+)',asyncHandler(async (req,res,next) => {
     const {
         content
     } = req.body
-    const review = await Review.findByPk(reviewId);
+    const review = await Review.findByPk(reviewId)
     if(review) {
-        let newReview = await review.update({
-            content
+        await review.update({
+            content : content
         })
-        return res.json(newReview)
+
+        const newReview = await Review.findAll({
+            where : {
+                id : reviewId
+            },
+            include : [{model:User}]
+        })
+
+        return res.json(newReview[0])
+
     } else {
         let error = reviewNotFoundError();
         next(error)

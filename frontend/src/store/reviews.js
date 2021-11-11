@@ -29,8 +29,8 @@ const removeReview = reviewId => ({
 })
 //thunks
 
-export const getAllReviews = (id) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${id}`);
+export const getAllReviews = (carId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/car/${carId}`);
     if(response.ok) {
         const reviews = await response.json();
         dispatch(getReviews(reviews))
@@ -46,6 +46,7 @@ export const addOneReview = (payload) => async (dispatch) => {
     if(response.ok) {
         const newReview = await response.json();
         dispatch(addReview(newReview))
+        return newReview
     }
 }
 
@@ -58,6 +59,7 @@ export const editingReviews = (payload,reviewId) => async (dispatch) => {
     if(response.ok) {
         const newReview = await response.json();
         dispatch(editReview(newReview))
+        return newReview
     }
 }
 

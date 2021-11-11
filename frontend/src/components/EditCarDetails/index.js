@@ -31,7 +31,7 @@ function EditCarDetails () {
         history.push(`/car/${id}`)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             name,
@@ -45,7 +45,7 @@ function EditCarDetails () {
             image1,
             image2
         }
-    dispatch(editCar(payload, id));
+    await dispatch(editCar(payload, id));
     history.push(`/car/${id}`)
     }
 

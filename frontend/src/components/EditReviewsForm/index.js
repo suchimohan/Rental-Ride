@@ -24,12 +24,12 @@ const EditReviewsForm = () => {
         history.push(`/car/${carId}`)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             content
         }
-        dispatch(editingReviews(payload,reviewId))
+        await dispatch(editingReviews(payload,reviewId))
         history.push(`/car/${carId}`)
     }
 

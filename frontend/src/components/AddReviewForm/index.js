@@ -18,13 +18,13 @@ const AddReviewForm = () => {
         history.push(`/car/${id}`)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             content : content,
             carId : id
         }
-        dispatch(addOneReview(payload));
+       await dispatch(addOneReview(payload));
         history.push(`/car/${id}`)
     }
 

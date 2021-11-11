@@ -59,6 +59,7 @@ export const addOneCar = (payload) => async (dispatch) => {
     if(response.ok) {
         const newCar = await response.json();
         dispatch(addCars(newCar))
+        return newCar;
       }
 }
 
@@ -81,6 +82,7 @@ export const editCar = (payload, id) => async (dispatch) => {
     if(response.ok) {
         const newCar = await response.json();
         dispatch(editOneCar(newCar))
+        return newCar
     }
 }
 
