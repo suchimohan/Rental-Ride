@@ -27,13 +27,13 @@ function Navigation({ isLoaded }){
       <div className="sessionDiv">
         <span className="hiUser">Welcome {sessionUser.username}!</span>
         <NavLink to="/create-car">Add Car</NavLink>
-        <button onClick={logout}>Log Out</button>
+        <button className= "navButton" onClick={logout}>Log Out</button>
       </div>
     );
   } else {
     sessionLinks = (
       <>
-        <button type="button" onClick={()=>handelDemo()}>Demo</button>
+        <button className= "navButton" type="button" onClick={()=>handelDemo()}>Demo</button>
         <LoginFormModal />
         <SignUpFormModal />
       </>

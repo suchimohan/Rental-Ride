@@ -36,3 +36,15 @@ a:hover{
     font-size: larger;
     font-weight: bold;
 }
+
+.navButton {
+    font-size: large;
+    font-weight: bold;
+    border-radius: 1em;
+    border:none;
+    background-color:#D8E2DC;
+}
+
+.navButton:hover{
+    text-decoration: underline;
+}
