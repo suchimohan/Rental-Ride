@@ -8,6 +8,8 @@ import CreateCar from "./components/CreateCar"
 import CompleteCarDetails from "./components/CompleteCarDetails";
 // import Footer from "./components/Footer";
 import EditCarDetails from "./components/EditCarDetails";
+import AddReviewForm from "./components/AddReviewForm";
+import EditReviewsForm from "./components/EditReviewsForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,10 +29,16 @@ function App() {
           <CreateCar />
         </Route>
         <Route path="/car/:id">
-          <CompleteCarDetails isLoaded={isLoaded}/>
+          <CompleteCarDetails />
         </Route>
         <Route path="/:id/edit">
           <EditCarDetails />
+        </Route>
+        <Route exact path="/:id/review">
+          <AddReviewForm />
+        </Route>
+        <Route path="/:id/review/:reviewId/edit">
+          <EditReviewsForm />
         </Route>
         <Route path="/">
             <h2>Page Not Found</h2>

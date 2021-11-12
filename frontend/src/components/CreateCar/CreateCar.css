@@ -7,9 +7,10 @@
 
 .submit-button{
   color: black;
-  font-weight: bold;
   padding: 0 5px 0 5px;
   height: 40px;
+  background-color: #D8E2DC;
+  font-size: large;
 }
 
 .add-Car-Div{

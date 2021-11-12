@@ -31,7 +31,8 @@ function EditCarDetails () {
         history.push(`/car/${id}`)
     }
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             name,
@@ -45,7 +46,7 @@ function EditCarDetails () {
             image1,
             image2
         }
-    dispatch(editCar(payload, id));
+    await dispatch(editCar(payload, id));
     history.push(`/car/${id}`)
     }
 
@@ -75,6 +76,9 @@ function EditCarDetails () {
                     onChange={(e)=>setNumberOfSeats(e.target.value)}
                     defaultValue={oneCar.numberOfSeats}
                     required
+                    type="number"
+                    min="1"
+                    max="10"
                     />
                 </label>
                 <label>Features
@@ -110,6 +114,9 @@ function EditCarDetails () {
                     onChange={(e)=>setPrice(e.target.value)}
                     defaultValue={oneCar.price}
                     required
+                    type="number"
+                    min="1"
+                    max="1000"
                     />
                 </label>
                 <label> Image URL 1

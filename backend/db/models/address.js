@@ -26,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Address.associate = function(models) {
     // associations can be defined here
-    // Address.hasMany(models.Car,{
+    // Address.hasMany(models.Car, {
     //   foreignKey:'carId'
-    // })
+    // });
   };
   return Address;
 };

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { restoreUser } = require('../../utils/auth');
-const { User, Car, Image, Address } = require('../../db/models');
+const { User, Car, Image, Address, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 
@@ -13,9 +13,22 @@ function carNotFoundError (carId){
     return err
 }
 
+async function getCarDetails (carId) {
+    const car = await Car.findAll({
+        where: {
+            id : carId
+        },
+        include: [{model: User},
+                 {model:Image}]
+    })
+
+    return car[0]
+}
+
 router.get('/',asyncHandler(async function(req,res){
     const cars = await Car.findAll({
-        include: [{model: Image}]
+        include: [{model: Image},
+                  {model: User}]
     })
     return res.json(cars);
 }))
@@ -56,23 +69,16 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         imageURL : image2
     })
 
-    let Images = [newImage1,newImage2]
+    let newCar = await getCarDetails(car.id)
 
-    car[Images] = Images
-
-    return res.json(car);
+    return res.json(newCar);
 }))
 
 router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
     const carId = req.params.id
-    const car = await Car.findAll({
-        where: {
-            id : carId
-        },
-        include: [{model: Image}]
-    })
+    const car = await getCarDetails(carId)
     if(car) {
-        return res.json(car[0]);
+        return res.json(car);
     } else {
         let error = carNotFoundError(carId);
         next(error)
@@ -118,10 +124,9 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
             imageURL : image2
         })
 
-        let Images = [newImage1,newImage2]
-        newCar[Images] = Images
+        const updatedCar = await getCarDetails(carId)
 
-        return res.json(newCar)
+        return res.json(updatedCar)
     } else {
         let error = carNotFoundError(carId);
         next(error)

@@ -20,7 +20,11 @@ const CreateCar = () =>{
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleSubmit = (e) => {
+    const handleCancel = () => {
+        history.push('/')
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             name,
@@ -34,8 +38,11 @@ const CreateCar = () =>{
             image1,
             image2
         }
-    dispatch(addOneCar(payload));
-    history.push('/')
+
+    let createdCar = await dispatch(addOneCar(payload));
+    if (createdCar) {
+    history.push(`/car/${createdCar.id}`);
+    }
     }
 
     return (
@@ -59,6 +66,9 @@ const CreateCar = () =>{
                 value={numberOfSeats}
                 placeholder='Number of Seats'
                 required
+                type="number"
+                min = "1"
+                max = "10"
                 />
                 <input
                 onChange={(e)=>setFeatures(e.target.value)}
@@ -89,6 +99,9 @@ const CreateCar = () =>{
                 value={price}
                 placeholder= "Price Per Hour"
                 required
+                type="number"
+                min = "1"
+                max = "1000"
                 />
                 <input
                 onChange={(e)=>setImage1(e.target.value)}
@@ -104,6 +117,9 @@ const CreateCar = () =>{
                 />
                 <button className='submit-button' type='submit'>
                     Publish
+                </button>
+                <button className='submit-button' type='submit' onClick={()=>{handleCancel()}}>
+                    Cancel
                 </button>
             </form>
         </div>

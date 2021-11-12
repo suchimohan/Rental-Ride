@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+// import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignUpFormModal from '../SignUpFormModal';
 import './Navigation.css';
@@ -16,12 +16,20 @@ function Navigation({ isLoaded }){
     dispatch(sessionActions.login({credential : "Demo-lition", password: "password"}))
   }
 
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
+
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <div className="sessionDiv">
+        <span className="hiUser">Welcome {sessionUser.username}!</span>
         <NavLink to="/create-car">Add Car</NavLink>
-        <ProfileButton user={sessionUser} />
+        <button onClick={logout}>Log Out</button>
+        {/* <ProfileButton user={sessionUser} /> */}
       </div>
     );
   } else {

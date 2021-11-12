@@ -1,26 +1,63 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Car = sequelize.define('Car', {
-    userId: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-    model: DataTypes.STRING,
-    numberOfSeats: DataTypes.INTEGER,
-    features: DataTypes.STRING,
-    rules: DataTypes.STRING,
-    fuelType: DataTypes.STRING,
-    licensePlateNumber: DataTypes.STRING,
-    price: DataTypes.DECIMAL
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    numberOfSeats: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    features: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    rules: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    fuelType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    licensePlateNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL(7,2),
+      allowNull: false,
+    }
   }, {});
   Car.associate = function(models) {
     // associations can be defined here
-    // Car.belongsTo(models.User,{
-    //   foreignKey: 'userId'
-    // })
     Car.hasMany(models.Image,{
       foreignKey: 'carId',
       onDelete: 'CASCADE',
       hooks: true
-    })
+    });
+    Car.hasMany(models.Review,{
+      foreignKey: 'carId',
+      onDelete: 'CASCADE',
+      hooks: true
+    });
+    // Car.belongsTo(models.Address,{
+    //   foreignKey: 'carId',
+    //   onDelete: 'CASCADE',
+    //   hooks: true
+    // });
+    Car.belongsTo(models.User,{
+      foreignKey: 'userId'
+    });
   };
   return Car;
 };

@@ -1,8 +1,10 @@
-.complete-car-details{
+.complete_car_details{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 20px;
+    padding-left: 240px;
+    padding-right: 200px;
 }
 
 .twoCarDiv{
@@ -11,32 +13,110 @@
     gap:10px;
 }
 
-.display-details{
+.displayDetails{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap:20px;
-    margin: 40px;
+    margin: 30px 30px 30px 30px;
     font-size: 3em;
+    min-width: 30%;
 }
 
-.edit-delete-car-buttons{
+.edit_delete_car_buttons{
     display: flex;
     flex-direction: row;
     gap:40px;
-    margin-bottom:40px ;
+    margin: 20px 20px 20px 30px;
 }
 
-.edit-car-button {
-    height:3em;
-    width:5em;
+.edit_car_button {
+    height:2em;
+    width:10em;
     border-radius: 1em;
+    font-size: large;
+    background-color: #D8E2DC;
+}
+
+.delete_car_button {
+    height:2em;
+    width:10em;
+    border-radius: 1em;
+    font-size: large;
+    background-color: #D8E2DC;
+}
+
+.display_reviews{
+    margin: 30px 30px 30px 30px;
+    padding-bottom: 100px;
+    min-width: 30%;
+}
+
+.big_car_title{
+    font-weight: bolder;
+}
+
+.other_titles {
+    font-size: 0.7em;
+}
+
+.add_review_button {
+    height:2em;
+    width:10em;
+    border-radius: 1em;
+    font-size: large;
+    background-color: #D8E2DC;
+}
+
+.review_render_div{
+    border-top: 1px solid lightgray;
+    margin-top: 20px;
+}
+
+.review_div{
+    border-bottom: 1px solid lightgray;
+    margin-top: 20px;
+}
+
+.user_profile_div{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+
+.profilePhoto{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+
+}
+
+p {
     font-size: large;
 }
 
-.delete-car-button {
-    height:3em;
-    width:5em;
+.car_user_div{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 20px 20px 20px 30px;
+    gap:20px;
+    min-width: 30%;
+}
+
+.car_user_name{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+.hostName{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.edit_review_button, .delete_review_button{
     border-radius: 1em;
-    font-size: large;
+    background-color: #D8E2DC;
 }

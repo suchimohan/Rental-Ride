@@ -7,11 +7,11 @@
 
 .submit-button{
   color: black;
-  font-weight: bold;
   padding: 0 5px 0 5px;
   height: 40px;
   width: 350px;
-
+  background-color: #D8E2DC;
+  font-size: large;
 }
 
 

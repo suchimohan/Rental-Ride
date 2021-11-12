@@ -1,14 +1,20 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define('Image', {
-    carId: DataTypes.INTEGER,
-    imageURL: DataTypes.STRING
+    carId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    imageURL: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {});
   Image.associate = function(models) {
     // associations can be defined here
     Image.belongsTo(models.Car, {
       foreignKey: 'carId'
-    })
+    });
   };
   return Image;
 };

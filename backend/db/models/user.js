@@ -87,9 +87,16 @@ User.signup = async function ({ username, email, password, city, profilePhotoURL
 };
   User.associate = function(models) {
     // associations can be defined here
-    User.hasMany(models.Car, {
-      foreignKey:'userId'
-    })
+  User.hasMany(models.Car, {
+    foreignKey:'userId',
+    onDelete: 'CASCADE',
+    hooks: true
+  });
+  User.hasMany(models.Review, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
+    hooks: true
+  });
   };
   return User;
 };

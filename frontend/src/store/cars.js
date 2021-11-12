@@ -59,6 +59,7 @@ export const addOneCar = (payload) => async (dispatch) => {
     if(response.ok) {
         const newCar = await response.json();
         dispatch(addCars(newCar))
+        return newCar;
       }
 }
 
@@ -81,6 +82,7 @@ export const editCar = (payload, id) => async (dispatch) => {
     if(response.ok) {
         const newCar = await response.json();
         dispatch(editOneCar(newCar))
+        return newCar
     }
 }
 
@@ -103,14 +105,16 @@ export const carReducer = (state={},action)=>{
         newState = {...state, [action.payload.id]: action.payload}
         return newState;
     }
-    case REMOVE_CAR:
+    case REMOVE_CAR: {
       newState = { ...state };
       delete newState[action.payload];
       return newState;
-    case EDIT_CAR:
+    }
+    case EDIT_CAR: {
       newState = {...state};
       newState[action.payload.id] = action.payload;
       return newState;
+    }
     default:
         return state;
     }
