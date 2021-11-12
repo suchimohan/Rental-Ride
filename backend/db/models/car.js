@@ -50,11 +50,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       hooks: true
     });
-    // Car.belongsTo(models.Address,{
-    //   foreignKey: 'carId',
-    //   onDelete: 'CASCADE',
-    //   hooks: true
-    // });
     Car.belongsTo(models.User,{
       foreignKey: 'userId'
     });

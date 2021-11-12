@@ -12,14 +12,6 @@ function reviewNotFoundError (){
     return err
 }
 
-// router.get('/',asyncHandler(async function(req,res){
-//     const reviews = await Review.findAll({
-//         include: [{model:User}]
-//     })
-//     return res.json(reviews);
-// }))
-
-//fix the route path
 router.get('/car/:carId(\\d+)',asyncHandler(async function(req,res,next){
     const carId = req.params.carId
     const reviews = await Review.findAll({
@@ -28,7 +20,7 @@ router.get('/car/:carId(\\d+)',asyncHandler(async function(req,res,next){
         },
         include: [{model: User}]
     })
-    // console.log(reviews)
+
     if(reviews) {
     return res.json(reviews);
     } else {
@@ -41,7 +33,7 @@ router.post('/',handleValidationErrors,restoreUser,asyncHandler(async function(r
     const {user} = req;
     const {
         content,
-        carId //carid
+        carId
     } = req.body
     const review = await Review.create({
         userId : user.id,
@@ -49,8 +41,6 @@ router.post('/',handleValidationErrors,restoreUser,asyncHandler(async function(r
         content : content,
     })
 
-    // console.log("//////////////////////////////")
-    // console.log(review.id)
 
     const newReview = await Review.findAll({
         where : {
