@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import CarComponent from "./components/CarComponent"
 import CreateCar from "./components/CreateCar"
 import CompleteCarDetails from "./components/CompleteCarDetails";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 import EditCarDetails from "./components/EditCarDetails";
 import AddReviewForm from "./components/AddReviewForm";
 import EditReviewsForm from "./components/EditReviewsForm";
@@ -44,7 +44,7 @@ function App() {
             <h2>Page Not Found</h2>
         </Route>
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </>
 );
 }
