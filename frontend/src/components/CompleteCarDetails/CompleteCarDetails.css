@@ -115,3 +115,8 @@ p {
     font-size: 1.5em;
     font-weight: bold;
 }
+
+.edit_review_button, .delete_review_button{
+    border-radius: 1em;
+    background-color: #D8E2DC;
+}

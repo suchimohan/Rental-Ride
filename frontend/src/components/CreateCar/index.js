@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useDispatch} from "react-redux"
 import { useHistory } from "react-router";
 import {addOneCar} from "../../store/cars";
@@ -66,6 +66,9 @@ const CreateCar = () =>{
                 value={numberOfSeats}
                 placeholder='Number of Seats'
                 required
+                type="number"
+                min = "1"
+                max = "10"
                 />
                 <input
                 onChange={(e)=>setFeatures(e.target.value)}
@@ -96,6 +99,9 @@ const CreateCar = () =>{
                 value={price}
                 placeholder= "Price Per Hour"
                 required
+                type="number"
+                min = "1"
+                max = "1000"
                 />
                 <input
                 onChange={(e)=>setImage1(e.target.value)}
