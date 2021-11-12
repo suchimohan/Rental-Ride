@@ -6,7 +6,6 @@ import Navigation from "./components/Navigation";
 import CarComponent from "./components/CarComponent"
 import CreateCar from "./components/CreateCar"
 import CompleteCarDetails from "./components/CompleteCarDetails";
-import Footer from "./components/Footer";
 import EditCarDetails from "./components/EditCarDetails";
 import AddReviewForm from "./components/AddReviewForm";
 import EditReviewsForm from "./components/EditReviewsForm";
@@ -19,33 +18,32 @@ function App() {
   }, [dispatch]);
 
   return isLoaded && (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      <Switch>
-        <Route exact path='/'>
-          <CarComponent />
-        </Route>
-        <Route path="/create-car">
-          <CreateCar />
-        </Route>
-        <Route path="/car/:id">
-          <CompleteCarDetails />
-        </Route>
-        <Route path="/:id/edit">
-          <EditCarDetails />
-        </Route>
-        <Route exact path="/:id/review">
-          <AddReviewForm />
-        </Route>
-        <Route path="/:id/review/:reviewId/edit">
-          <EditReviewsForm />
-        </Route>
-        <Route path="/">
+      <>
+        <Navigation isLoaded={isLoaded} />
+        <Switch>
+          <Route exact path='/'>
+            <CarComponent />
+          </Route>
+          <Route path="/create-car">
+            <CreateCar />
+          </Route>
+          <Route path="/car/:id">
+            <CompleteCarDetails />
+          </Route>
+          <Route path="/:id/edit">
+            <EditCarDetails />
+          </Route>
+          <Route exact path="/:id/review">
+            <AddReviewForm />
+          </Route>
+          <Route path="/:id/review/:reviewId/edit">
+            <EditReviewsForm />
+          </Route>
+          <Route path="/">
             <h2>Page Not Found</h2>
-        </Route>
-      </Switch>
-      <Footer />
-    </>
+          </Route>
+        </Switch>
+      </>
 );
 }
 
