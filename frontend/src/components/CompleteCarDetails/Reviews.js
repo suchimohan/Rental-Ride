@@ -40,7 +40,7 @@ function Reviews({reviewId,carId,content,user}){
     return(
         <div className="review_div">
             <div className="user_profile_div">
-                <img className="profilePhoto" src={user?.profilePhotoURL} alt="user" />
+                <img className="profilePhoto" src={user?.profilePhotoURL} alt="" />
                 <h3>{user?.username}</h3>
             </div>
             <p>{content}</p>

@@ -73,7 +73,7 @@ function CompleteCarDetails(){
                 ))}
             </div>
             <div className="car_user_div">
-                <img className="profilePhoto" src={oneCar?.User?.profilePhotoURL} alt="user" />
+                <img className="profilePhoto" src={oneCar?.User?.profilePhotoURL} alt="" />
                 <div className="car_user_name">
                     <span className="hostName">Hosted By {oneCar?.User?.username}</span>
                     <span className="hostName">{oneCar?.User?.city}</span>
