@@ -30,3 +30,9 @@ a:hover{
     flex-direction: row;
     gap:50px
 }
+
+.hiUser {
+    color: black;
+    font-size: larger;
+    font-weight: bold;
+}
