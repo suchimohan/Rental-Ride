@@ -79,7 +79,7 @@ function SignupFormPage({modalState}) {
         <label>
           Profile Photo
           <input
-            type="text"
+            type="url"
             value={profilePhotoURL}
             placeholder="Image URL"
             onChange={(e) => setProfilePhotoURL(e.target.value)}
