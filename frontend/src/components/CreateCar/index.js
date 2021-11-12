@@ -108,12 +108,14 @@ const CreateCar = () =>{
                 value={image1}
                 placeholder= "Car Image URL"
                 required
+                type="url"
                 />
                 <input
                 onChange={(e)=>setImage2(e.target.value)}
                 value={image2}
                 placeholder= "Car Image URL"
                 required
+                type="url"
                 />
                 <button className='submit-button' type='submit'>
                     Publish

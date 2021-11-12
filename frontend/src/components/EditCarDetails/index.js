@@ -124,6 +124,7 @@ function EditCarDetails () {
                     onChange={(e)=>setImage1(e.target.value)}
                     defaultValue={oneCar.Images[0].imageURL}
                     required
+                    type="url"
                     />
                 </label>
                 <label> Image URL 2
@@ -131,6 +132,7 @@ function EditCarDetails () {
                     onChange={(e)=>setImage2(e.target.value)}
                     defaultValue={oneCar.Images[1].imageURL}
                     required
+                    type="url"
                     />
                 </label>
                 <button className='submit-button' type='submit'>

@@ -10,7 +10,7 @@ const CarDetails = ({id,name,model,price,image,user}) => {
 
     return (
       <div className='car-detail'>
-        <img className= 'carImage' src={image1} alt={name} />
+        <img className= 'carImage' src={image1} alt=""/>
         <span className='car-title'>{name}{model}</span>
         <span className='car-title'>{user.city}</span>
         <span className='car-title'>${price}/ day</span>
