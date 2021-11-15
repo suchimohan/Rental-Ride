@@ -13,7 +13,7 @@ import Reviews from './Reviews';
 
 function CompleteCarDetails(){
     const sessionUser = useSelector(state => state.session.user)
-    const oneCar = useSelector((state)=> Object.values(state.car)[0])
+    const cars= useSelector((state)=> Object.values(state.car))
     const {id} = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
@@ -25,7 +25,7 @@ function CompleteCarDetails(){
 
     const reviews = useSelector((state)=>Object.values(state.review))
 
-    // const oneCar = cars.find((car)=>+car.id === +id)
+    const oneCar = cars.find((car)=>+car.id === +id)
 
 
     let sessionLinks;
