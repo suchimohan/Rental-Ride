@@ -15,7 +15,7 @@ https://rental-ride.herokuapp.com/
 https://github.com/suchimohan/Rental-Ride/wiki
 
 # ScreenShots
-(rentalride)[https://res.cloudinary.com/dpdawijui/image/upload/v1641411362/screencapture-rental-ride-herokuapp-2022-01-05-10_53_17_qh20ye.png]
+![rentalride](https://res.cloudinary.com/dpdawijui/image/upload/v1641411362/screencapture-rental-ride-herokuapp-2022-01-05-10_53_17_qh20ye.png)
 
 
 # Instructions on how to build/run the project (installation instructions)
