@@ -12,7 +12,7 @@ function SignupFormPage({modalState}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [city,setCity] = useState("");
-  const [profilePhotoURL, setProfilePhotoURL] = useState("")
+  const [image, setImage] = useState(null)
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
@@ -21,13 +21,18 @@ function SignupFormPage({modalState}) {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password,city,profilePhotoURL}))
+      return dispatch(sessionActions.signup({ email, username, password,city,image}))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
   };
 
   return (
@@ -79,10 +84,9 @@ function SignupFormPage({modalState}) {
         <label>
           Profile Photo
           <input
-            type="url"
-            value={profilePhotoURL}
-            placeholder="Image URL"
-            onChange={(e) => setProfilePhotoURL(e.target.value)}
+            type="file"
+            onChange={updateFile}
+            required
           />
         </label>
         <div className="signUpButtonDiv">
