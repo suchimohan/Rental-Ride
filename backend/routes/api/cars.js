@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser } = require('../../utils/auth');
 const { User, Car, Image, Address, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { Op } = require("sequelize");
 
 function carNotFoundError (carId){
     const err = new Error(`A car of the given ID ${carId} could not be found`);
@@ -144,5 +144,17 @@ router.delete('/:id(\\d+)', asyncHandler(async function (req,res,next){
         next(error)
     }
 }))
+
+router.get("/search", asyncHandler(async (req, res, next) =>{
+    const cityName = req.query.city;
+    console.log(cityName)
+    const car = await User.findAll({
+        where: {
+          city: {[Op.iLike]: `${cityName}`},
+        },
+        include: [{model: Car}]
+    })
+    return res.json(car);
+}));
 
 module.exports = router;
