@@ -147,12 +147,11 @@ router.delete('/:id(\\d+)', asyncHandler(async function (req,res,next){
 
 router.get("/search", asyncHandler(async (req, res, next) =>{
     const cityName = req.query.city;
-    console.log(cityName)
-    const car = await User.findAll({
+    const car = await Car.findAll({
         where: {
           city: {[Op.iLike]: `${cityName}`},
         },
-        include: [{model: Car}]
+        include: [{model: Image}]
     })
     return res.json(car);
 }));
