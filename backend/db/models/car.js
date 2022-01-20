@@ -36,6 +36,22 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.DECIMAL(7,2),
       allowNull: false,
+    },
+    pickup_address: {
+      type: DataTypes.STRING(800),
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    latitude: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    longitude: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
     }
   }, {});
   Car.associate = function(models) {
