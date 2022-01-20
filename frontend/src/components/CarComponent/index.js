@@ -19,7 +19,7 @@ const CarComponent = () => {
              FIND YOUR PERFECT RIDE
             </div>
             <div className='displayCars'>
-                {cars?.map(({id,name,model,price,Images,User})=>(
+                {cars?.map(({id,name,model,price,city,Images,User})=>(
                     <CarDetails
                         key={id}
                         id={id}
@@ -28,6 +28,7 @@ const CarComponent = () => {
                         price={price}
                         image={Images}
                         user={User}
+                        city={city}
                     />
                 ))}
             </div>

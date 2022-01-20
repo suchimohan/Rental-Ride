@@ -4,12 +4,14 @@ import { carReducer } from './cars';
 import sessionReducer from './session'
 import { reviewReducer } from './reviews';
 import { searchReducer } from './search';
+import { mapsReducer } from './maps'
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     car : carReducer,
     review : reviewReducer,
-    search : searchReducer
+    search : searchReducer,
+    map : mapsReducer
 });
 
 let enhancer;

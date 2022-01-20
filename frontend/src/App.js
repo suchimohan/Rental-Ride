@@ -9,6 +9,7 @@ import CompleteCarDetails from "./components/CompleteCarDetails";
 import EditCarDetails from "./components/EditCarDetails";
 import AddReviewForm from "./components/AddReviewForm";
 import EditReviewsForm from "./components/EditReviewsForm";
+import SearchPage from './components/SearchPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route path="/:id/review/:reviewId/edit">
             <EditReviewsForm />
+          </Route>
+          <Route path='/search/:tag' exact={true} >
+            <SearchPage />
           </Route>
           <Route path="/">
             <h2>Page Not Found</h2>

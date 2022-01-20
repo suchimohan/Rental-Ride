@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-// import {search} from '../../store/search';
+import {search} from '../../store/search';
 import {useHistory} from "react-router";
 
 const Search = () => {
@@ -16,10 +16,10 @@ const handleKeyPress = async (e) =>{
         if(searchKeyWord === ""){
             history.push(`/`)
         } else {
-        // let resultFromSearch = await dispatch(search(searchKeyWord));
-        // if (resultFromSearch) {
-        //     history.push(`/search/${searchKeyWord}`)
-        // }
+        let resultFromSearch = await dispatch(search(searchKeyWord));
+        if (resultFromSearch) {
+            history.push(`/search/${searchKeyWord}`)
+        }
     }}
 }
 
