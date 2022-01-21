@@ -1,7 +1,7 @@
 import './CarDetails.css'
 import { NavLink } from 'react-router-dom';
 
-const CarDetails = ({id,name,model,price,image,user}) => {
+const CarDetails = ({id,name,model,price,image,user,city}) => {
 
     let image1 = ""
     if(image){
