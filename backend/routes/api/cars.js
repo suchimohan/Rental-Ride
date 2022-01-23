@@ -6,6 +6,12 @@ const { User, Car, Image, Address, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require("sequelize");
 
+const {
+    multiplePublicFileUpload,
+    multipleMulterUpload
+  } = require("../../awsS3");
+
+
 function carNotFoundError (carId){
     const err = new Error(`A car of the given ID ${carId} could not be found`);
     err.title = "Car not found."
@@ -33,7 +39,7 @@ router.get('/',asyncHandler(async function(req,res){
     return res.json(cars);
 }))
 
-router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(req,res){
+router.post('/',multipleMulterUpload("images"), handleValidationErrors,restoreUser, asyncHandler(async function(req,res){
     const { user } = req;
     const {
         name,
@@ -44,8 +50,13 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         fuelType,
         licensePlateNumber,
         price,
-        image1,
-        image2 } = req.body
+        pickup_address,
+        city,
+        latitude,
+        longitude,
+         } = req.body
+
+    const profileImageUrls = await multiplePublicFileUpload(req.files)
 
     const car = await Car.create({
         userId : user.id,
@@ -57,17 +68,22 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         fuelType : fuelType,
         licensePlateNumber : licensePlateNumber,
         price : price,
+        pickup_address: pickup_address,
+        city: city,
+        latitude: latitude,
+        longitude: longitude,
     });
 
-    const newImage1 = await Image.create({
+    for(let i=0; i<profileImageUrls.length; i++){
+    const newImage = await Image.create({
         carId : car.id,
-        imageURL : image1
-    })
+        imageURL : profileImageUrls[i]
+    })}
 
-    const newImage2 = await Image.create({
-        carId : car.id,
-        imageURL : image2
-    })
+    // const newImage2 = await Image.create({
+    //     carId : car.id,
+    //     imageURL : image2
+    // })
 
     let newCar = await getCarDetails(car.id)
 

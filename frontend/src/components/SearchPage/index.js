@@ -4,7 +4,7 @@ import { search } from "../../store/search"
 import CarDetails from "../CarDetails"
 import './SearchPage.css'
 import {useParams} from 'react-router-dom';
-import MapContainer from "../Map";
+import {MapContainer} from "../Map";
 
 const SearchPage = () => {
     const searchResults = useSelector((state)=>Object.values(state.search))

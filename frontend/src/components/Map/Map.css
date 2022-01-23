@@ -1,14 +1,12 @@
 .image-title-map-container {
     box-sizing: border-box;
     box-shadow:inset 0 0 0 2000px rgba(27, 26, 27, 0.3);
-
     height: 250px;
     width: 300px;
     display: flex !important;
     padding: 20px 10px;
     margin: 0 auto;
     border: 0px;
-    /* align-content: flex-start; */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -18,7 +16,6 @@
     justify-content: flex-end;
     flex-wrap: nowrap;
     border-radius: 5px;
-
   }
 
   .image-title-map {
@@ -26,12 +23,6 @@
     font-weight: 700;
     font-size: x-large;
     overflow-wrap: break-word !important;
-    /* font-family: 'Poppins', sans-serif; */
     line-height: 0.82em;
     padding-left: 20px;
-
-  }
-
-  .image-title-map {
-    word-break: break-all;
   }

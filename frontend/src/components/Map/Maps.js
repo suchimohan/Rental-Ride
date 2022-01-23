@@ -1,10 +1,10 @@
 import React from 'react';
-import { GoogleMap, InfoBox, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 import {Marker} from '@react-google-maps/api'
 import './Map.css'
 
-import {useState, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
+import {useState} from 'react'
+import { Link } from 'react-router-dom';
 
 const containerStyle = {
   width: "100%",
@@ -15,7 +15,7 @@ const containerStyle = {
 
 const Maps = ({ apiKey, cars }) => {
 
-  const [cordinates, setCordinates] = useState(null)
+  const [selectedCoordinates, setSelectedCoordinates] = useState(null)
 
   const getCenter = () => {
     let lat = 0;
@@ -31,26 +31,11 @@ const Maps = ({ apiKey, cars }) => {
 
   const center = getCenter();
 
-  useEffect(()=>{
-    const listener = e => {
-      if(e.key === "Escape"){
-        setCordinates(null);
-      }
-    }
-    window.addEventListener("keydown", listener);
-
-    return () => {
-      window.removeEventListener("keydown", listener);
-    };
-  },[]);
-
-
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
   });
 
-  const options = { closeBoxURL: '', enableEventPropagation: true };
 
   return (
     <>
@@ -69,25 +54,27 @@ const Maps = ({ apiKey, cars }) => {
             lng: parseFloat(ele.longitude)
           }}
           onClick={()=>{
-            setCordinates(ele)
+            setSelectedCoordinates(ele)
           }}
           />
         ))}
-        {cordinates && (
+        {selectedCoordinates && (
           <InfoWindow
            onCloseClick={() => {
-            setCordinates(null);
+            setSelectedCoordinates(null);
            }}
            position={{
-             lat: parseFloat(cordinates.latitude),
-             lng: parseFloat(cordinates.longitude)
+             lat: parseFloat(selectedCoordinates.latitude),
+             lng: parseFloat(selectedCoordinates.longitude)
            }}
            >
-             <div className='image-title-map-container' style={{backgroundImage: `url('${cordinates.Images[0].imageURL}')`}}>
-              <div className="image-title-map">
-                ${cordinates.price}
+            <Link to={`/car/${selectedCoordinates.id}`}>
+              <div className='image-title-map-container' style={{backgroundImage: `url('${selectedCoordinates.Images[0].imageURL}')` }}>
+                <div className="image-title-map">
+                  ${selectedCoordinates.price}
+                </div>
               </div>
-             </div>
+            </Link>
            </InfoWindow>
         )}
         </GoogleMap>

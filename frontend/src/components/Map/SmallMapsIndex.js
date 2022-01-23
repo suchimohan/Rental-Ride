@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getKey } from '../../store/maps';
-import Maps from './Maps';
+import SmallMaps from './SmallMaps';
 
 
-export const MapContainer = ({cars}) => {
+export const SmallMapContainer = ({car}) => {
   const key = useSelector((state) => state.map.key);
   const dispatch = useDispatch();
 
@@ -20,6 +20,6 @@ export const MapContainer = ({cars}) => {
   }
 
   return (
-    <Maps apiKey={key} cars={cars}/>
+    <SmallMaps apiKey={key} car={car}/>
   );
 };

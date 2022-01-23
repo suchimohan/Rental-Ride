@@ -1,25 +1,28 @@
 .add-car{
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px
 }
 
-.submit-button{
+.add-Car-Div .submit-button{
   color: black;
   padding: 0 5px 0 5px;
   height: 40px;
   background-color: #D8E2DC;
   font-size: large;
+  width: 450px;
 }
 
 .add-Car-Div{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
 }
 
-input {
+.add-Car-Div input {
     height: 40px;
-    width: 350px;
+    width: 450px;
 }
