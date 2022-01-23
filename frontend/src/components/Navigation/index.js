@@ -27,7 +27,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <div className="sessionDiv">
         <span className="hiUser">Welcome {sessionUser.username}!</span>
-        <NavLink to="/create-car">Add Car</NavLink>
+        <NavLink to="/create-car">List Car</NavLink>
         <button className= "navButton" onClick={logout}>Log Out</button>
       </div>
     );

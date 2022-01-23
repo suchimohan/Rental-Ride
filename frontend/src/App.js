@@ -10,6 +10,7 @@ import EditCarDetails from "./components/EditCarDetails";
 import AddReviewForm from "./components/AddReviewForm";
 import EditReviewsForm from "./components/EditReviewsForm";
 import SearchPage from './components/SearchPage';
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <CarComponent />
+            <Footer/>
           </Route>
           <Route path="/create-car">
             <CreateCar />

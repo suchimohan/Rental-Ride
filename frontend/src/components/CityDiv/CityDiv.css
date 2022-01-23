@@ -1,0 +1,36 @@
+.cityContainer{
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.cityCard{
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.city_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 20px 0;
+    padding: 20px 10px 10px 10px;
+  }
+
+.city_name {
+      color: black;
+  }
+
+.city_image {
+      width: 200px;
+      height: 100px;
+      margin: 0 0 10px 0;
+}
