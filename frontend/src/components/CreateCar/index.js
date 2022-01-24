@@ -17,8 +17,6 @@ const CreateCar = () =>{
     const [city, setCity] = useState('')
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
-    // const [image1,setImage1] = useState('')
-    // const [image2,setImage2] = useState('')
     const [images,setImages] = useState([])
     const [errors, setErrors] = useState('')
 
@@ -168,7 +166,7 @@ const CreateCar = () =>{
                 placeholder= "Enter Latitude of the Pickup Address*"
                 required
                 type="number"
-                step="any"
+                step="0.000001"
                 />
                  <input
                 onChange={(e)=>setLongitude(e.target.value)}
@@ -176,22 +174,8 @@ const CreateCar = () =>{
                 placeholder= "Enter Longitude of the Pickup Address*"
                 required
                 type="number"
-                step="any"
+                step="0.000001"
                 />
-                {/* <input
-                onChange={(e)=>setImage1(e.target.value)}
-                value={image1}
-                placeholder= "Enter Car Image URL"
-                required
-                type="url"
-                />
-                <input
-                onChange={(e)=>setImage2(e.target.value)}
-                value={image2}
-                placeholder= "Enter Car Image URL"
-                required
-                type="url"
-                /> */}
                 <label>Upload Car Photos*</label>
                 <input
                 type="file"

@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import React, {useState} from 'react'
 import './EditCar.css';
 import {editCar} from "../../store/cars";
+import ImagePreview from './ImagePreview'
 
 function EditCarDetails () {
 
@@ -21,8 +22,13 @@ function EditCarDetails () {
     const [fuelType, setFuelType] = useState(oneCar.fuelType)
     const [licensePlateNumber,setLicensePlateNumber] = useState(oneCar.licensePlateNumber)
     const [price,setPrice] = useState(oneCar.price)
-    const [image1, setImage1] = useState(oneCar.image1)
-    const [image2, setImage2] = useState(oneCar.image2)
+    const [pickup_address,setPickup_address] = useState(oneCar.pickup_address)
+    const [city, setCity] = useState(oneCar.city)
+    const [latitude, setLatitude] = useState(oneCar.latitude)
+    const [longitude, setLongitude] = useState(oneCar.longitude)
+    const [images,setImages] = useState(oneCar.Images)
+    const [errors, setErrors] = useState('')
+    const [deletedImgIds,setDeletedImageIds] = useState([])
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -34,6 +40,24 @@ function EditCarDetails () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (
+            name=== "" ||
+            model=== "" ||
+            numberOfSeats=== "" ||
+            features=== "" ||
+            rules=== "" ||
+            fuelType=== "" ||
+            licensePlateNumber=== "" ||
+            price=== "" ||
+            pickup_address=== "" ||
+            city=== "" ||
+            latitude=== "" ||
+            longitude=== "" ||
+            images.length === 0
+        ) {
+            setErrors('Please fill out all fields and upload few photos of file type .jpg, .jpeg or .png')
+        }
+        else {
         const payload = {
             name,
             model,
@@ -43,11 +67,15 @@ function EditCarDetails () {
             fuelType,
             licensePlateNumber,
             price,
-            image1,
-            image2
+            pickup_address,
+            city,
+            latitude,
+            longitude,
+            // images
         }
     await dispatch(editCar(payload, id));
     history.push(`/car/${id}`)
+    }
     }
 
     if (!oneCar) {
@@ -57,84 +85,96 @@ function EditCarDetails () {
         <div className='edit-Car-Div'>
             <h2>Edit your car details</h2>
             <form onSubmit={handleSubmit} className='edit-car'>
-                <label> Name
-                    <input
-                    defaultValue={oneCar.name}
-                    onChange={(e)=>setName(e.target.value)}
-                    required
-                    />
-                </label>
-                <label> Model
-                    <input
-                    defaultValue={oneCar.model}
-                    onChange={(e)=>setModel(e.target.value)}
-                    required
-                    />
-                </label>
-                <label> Number of Seats
-                    <input
-                    onChange={(e)=>setNumberOfSeats(e.target.value)}
-                    defaultValue={oneCar.numberOfSeats}
-                    required
-                    type="number"
-                    min="1"
-                    max="10"
-                    />
-                </label>
-                <label>Features
-                    <input
-                    onChange={(e)=>setFeatures(e.target.value)}
-                    defaultValue={oneCar.features}
-                    required
-                    />
-                </label>
-                <label>Rules
-                    <input
-                    onChange={(e)=>setRules(e.target.value)}
-                    defaultValue={oneCar.rules}
-                    required
-                    />
-                </label>
-                <label> Fuel Type
-                    <input
-                    onChange={(e)=>setFuelType(e.target.value)}
-                    defaultValue={oneCar.fuelType}
-                    required
-                    />
-                </label>
-                <label> License Plate Number
-                    <input
-                    onChange={(e)=>setLicensePlateNumber(e.target.value)}
-                    defaultValue={oneCar.licensePlateNumber}
-                    required
-                    />
-                </label>
-                <label> Price
-                    <input
-                    onChange={(e)=>setPrice(e.target.value)}
-                    defaultValue={oneCar.price}
-                    required
-                    type="number"
-                    min="1"
-                    max="1000"
-                    />
-                </label>
-                <label> Image URL 1
-                    <input
-                    onChange={(e)=>setImage1(e.target.value)}
-                    defaultValue={oneCar.Images[0].imageURL}
-                    required
-                    type="url"
-                    />
-                </label>
-                <label> Image URL 2
-                    <input
-                    onChange={(e)=>setImage2(e.target.value)}
-                    defaultValue={oneCar.Images[1].imageURL}
-                    required
-                    type="url"
-                    />
-                </label>
+                <label> Name </label>
+                <input
+                defaultValue={name}
+                onChange={(e)=>setName(e.target.value)}
+                required
+                />
+                <label> Model</label>
+                <input
+                defaultValue={model}
+                onChange={(e)=>setModel(e.target.value)}
+                required
+                />
+                <label> Number of Seats  </label>
+                <input
+                onChange={(e)=>setNumberOfSeats(e.target.value)}
+                defaultValue={numberOfSeats}
+                required
+                type="number"
+                min="1"
+                max="10"
+                />
+                <label>Features  </label>
+                <input
+                onChange={(e)=>setFeatures(e.target.value)}
+                defaultValue={features}
+                required
+                />
+                <label>Rules   </label>
+                <input
+                onChange={(e)=>setRules(e.target.value)}
+                defaultValue={rules}
+                required
+                />
+                <label> Fuel Type </label>
+                <input
+                onChange={(e)=>setFuelType(e.target.value)}
+                defaultValue={fuelType}
+                required
+                />
+                <label> License Plate Number  </label>
+                <input
+                onChange={(e)=>setLicensePlateNumber(e.target.value)}
+                defaultValue={licensePlateNumber}
+                required
+                />
+                <label> Price   </label>
+                <input
+                onChange={(e)=>setPrice(e.target.value)}
+                defaultValue={price}
+                required
+                type="number"
+                min="1"
+                max="1000"
+                />
+                <label> Pickup Address </label>
+                <input
+                onChange={(e)=>setPickup_address(e.target.value)}
+                defaultValue={pickup_address}
+                required
+                />
+                <label> City  </label>
+                <input
+                onChange={(e)=>setCity(e.target.value)}
+                defaultValue={city}
+                required
+                />
+                <label> Latitude of the Pickup Address </label>
+                <input
+                onChange={(e)=>setLatitude(e.target.value)}
+                defaultValue={latitude}
+                required
+                type="number"
+                step="0.000001"
+                />
+                <label>Longitude of the Pickup Address</label>
+                <input
+                onChange={(e)=>setLongitude(e.target.value)}
+                defaultValue={longitude}
+                required
+                type="number"
+                step="0.000001"
+                />
+                <label>Image Preview</label>
+                <ImagePreview images={images} deletedImgIds = {deletedImgIds}/>
+                <label>Upload Car Photos*</label>
+                <input
+                type="file"
+                // onChange={handlePhotos}
+                multiple
+                />
                 <button className='submit-button' type='submit'>
                     Publish
                 </button>

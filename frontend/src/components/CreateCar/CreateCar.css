@@ -26,3 +26,9 @@
     height: 40px;
     width: 450px;
 }
+
+input[type=file]::file-selector-button {
+    padding: .2em .4em;
+    border-radius: .2em;
+    background-color: #D8E2DC;
+  }
