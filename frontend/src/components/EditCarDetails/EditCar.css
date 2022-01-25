@@ -1,15 +1,16 @@
 .edit-car{
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
-    gap: 10px
+    gap: 20px
 }
 
-.submit-button{
+.edit-Car-Div .submit-button{
   color: black;
   padding: 0 5px 0 5px;
   height: 40px;
-  width: 350px;
+  width: 400px;
   background-color: #D8E2DC;
   font-size: large;
 }
@@ -19,20 +20,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
 }
 
-input {
+
+.edit-Car-Div input {
     height: 40px;
-    width: 350px;
+    width: 400px;
     box-sizing:border-box;
     border: 1px solid #999;
     padding: 1em;
 }
 
-label {
+.edit-Car-Div label {
     display: inline-block;
-    width: 200px;
+    width: 350px;
     text-align: left;
     font-weight: bold;
     font-size:20px;
+}
+
+.preview-image {
+    height: 200px;
+    width: 380px;
 }

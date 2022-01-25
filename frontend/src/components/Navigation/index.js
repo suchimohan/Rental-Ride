@@ -6,6 +6,7 @@ import SignUpFormModal from '../SignUpFormModal';
 import './Navigation.css';
 import {useDispatch} from "react-redux"
 import * as sessionActions from "../../store/session";
+import Search from './Search'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -26,7 +27,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <div className="sessionDiv">
         <span className="hiUser">Welcome {sessionUser.username}!</span>
-        <NavLink to="/create-car">Add Car</NavLink>
+        <NavLink to="/create-car">List Car</NavLink>
         <button className= "navButton" onClick={logout}>Log Out</button>
       </div>
     );
@@ -41,12 +42,17 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul className="navigation">
-      <li className = "navigationLinks">
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <div className='headerDiv'>
+      <ul className="navigation">
+        <div className='rental-ride'>
+        <li><NavLink exact to="/">Rental-Ride</NavLink></li>
+        </div>
+        <li><Search /></li>
+        <li className = "navigationLinks">
+            {isLoaded && sessionLinks}
+        </li>
+      </ul>
+    </div>
   );
 }
 

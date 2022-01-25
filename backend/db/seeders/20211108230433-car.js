@@ -12,7 +12,11 @@ module.exports = {
         rules : 'No Smoking',
         fuelType : 'Electric',
         licensePlateNumber : 'LKS1234',
-        price : 108
+        price : 108,
+        pickup_address: "315 1st Ave W Seattle WA 98109",
+        city: 'Seattle',
+        latitude: 47.621450,
+        longitude: -122.358420,
       },
       {
         userId : 2,
@@ -23,7 +27,11 @@ module.exports = {
         rules : 'No Pets',
         fuelType : 'Gas (Regular)',
         licensePlateNumber : 'ABC345',
-        price : 45
+        price : 45,
+        pickup_address: "Seattle-Tacoma International Airport, Seattle, WA, USA",
+        city: 'Seattle',
+        latitude: 47.443546,
+        longitude: -122.301659,
       },
       {
         userId : 3,
@@ -34,7 +42,11 @@ module.exports = {
         rules : 'No eating inside the car',
         fuelType : 'Gas (Premium)',
         licensePlateNumber : 'GHK390',
-        price : 90
+        price : 90,
+        pickup_address: "Mineta San José International Airport (SJC), San Jose, CA, USA",
+        city: 'San Jose',
+        latitude: "37.363949",
+        longitude: "-121.928940",
       }
     ], {});
   },

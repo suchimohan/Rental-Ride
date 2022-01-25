@@ -4,6 +4,12 @@ const asyncHandler = require('express-async-handler');
 const { restoreUser } = require('../../utils/auth');
 const { User, Car, Image, Address, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Op } = require("sequelize");
+
+const {
+    multiplePublicFileUpload,
+    multipleMulterUpload
+  } = require("../../awsS3");
 
 
 function carNotFoundError (carId){
@@ -33,7 +39,7 @@ router.get('/',asyncHandler(async function(req,res){
     return res.json(cars);
 }))
 
-router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(req,res){
+router.post('/',multipleMulterUpload("images"), handleValidationErrors,restoreUser, asyncHandler(async function(req,res){
     const { user } = req;
     const {
         name,
@@ -44,8 +50,13 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         fuelType,
         licensePlateNumber,
         price,
-        image1,
-        image2 } = req.body
+        pickup_address,
+        city,
+        latitude,
+        longitude,
+         } = req.body
+
+    const profileImageUrls = await multiplePublicFileUpload(req.files)
 
     const car = await Car.create({
         userId : user.id,
@@ -57,17 +68,17 @@ router.post('/',handleValidationErrors,restoreUser, asyncHandler(async function(
         fuelType : fuelType,
         licensePlateNumber : licensePlateNumber,
         price : price,
+        pickup_address: pickup_address,
+        city: city,
+        latitude: latitude,
+        longitude: longitude,
     });
 
-    const newImage1 = await Image.create({
+    for(let i=0; i<profileImageUrls.length; i++){
+    const newImage = await Image.create({
         carId : car.id,
-        imageURL : image1
-    })
-
-    const newImage2 = await Image.create({
-        carId : car.id,
-        imageURL : image2
-    })
+        imageURL : profileImageUrls[i]
+    })}
 
     let newCar = await getCarDetails(car.id)
 
@@ -85,7 +96,7 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
     }
 }))
 
-router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.put('/:id(\\d+)',multipleMulterUpload("newImages"),handleValidationErrors, asyncHandler(async (req, res, next) => {
     const carId = req.params.id
     const {
         name,
@@ -96,17 +107,18 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
         fuelType,
         licensePlateNumber,
         price,
-        image1,
-        image2
+        pickup_address,
+        city,
+        latitude,
+        longitude,
+        deletedImgIds
     } = req.body
 
-    const car = await Car.findByPk(carId);
-    const oldImage = await Image.findAll({
-        where : {
-            carId: carId
-        }});
+    const carImageUrls = await multiplePublicFileUpload(req.files)
 
-    if(car && oldImage) {
+    const car = await Car.findByPk(carId);
+
+    if(car) {
         let newCar = await car.update({
             name,
             model,
@@ -115,17 +127,31 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
             rules,
             fuelType,
             licensePlateNumber,
-            price
+            price,
+            pickup_address,
+            city,
+            latitude,
+            longitude,
         })
-        let newImage1 = await oldImage[0].update({
-            imageURL : image1
-        })
-        let newImage2 = await oldImage[1].update({
-            imageURL : image2
-        })
+
+        if(deletedImgIds && deletedImgIds.length !==0) {
+            for(let i=0;i<deletedImgIds.length;i++){
+                const image = await Image.findByPk(deletedImgIds[i])
+                if(image){
+                    await image.destroy();
+                }
+            }
+        }
+
+        if(carImageUrls && carImageUrls.length !== 0) {
+            for(let i=0; i<carImageUrls.length; i++){
+                const newImage = await Image.create({
+                    carId : car.id,
+                    imageURL : carImageUrls[i]
+            })}
+        }
 
         const updatedCar = await getCarDetails(carId)
-
         return res.json(updatedCar)
     } else {
         let error = carNotFoundError(carId);
@@ -144,5 +170,16 @@ router.delete('/:id(\\d+)', asyncHandler(async function (req,res,next){
         next(error)
     }
 }))
+
+router.get("/search", asyncHandler(async (req, res, next) =>{
+    const cityName = req.query.city;
+    const car = await Car.findAll({
+        where: {
+          city: {[Op.iLike]: `${cityName}`},
+        },
+        include: [{model: Image}]
+    })
+    return res.json(car);
+}));
 
 module.exports = router;

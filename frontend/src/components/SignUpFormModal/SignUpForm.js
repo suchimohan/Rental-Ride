@@ -12,36 +12,43 @@ function SignupFormPage({modalState}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [city,setCity] = useState("");
-  const [profilePhotoURL, setProfilePhotoURL] = useState("")
+  const [image, setImage] = useState(null)
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    if (password === confirmPassword && (image.name.match(/\.(jpg|jpeg|png)$/))){
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password,city,profilePhotoURL}))
+      return dispatch(sessionActions.signup({ email, username, password,city,image}))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors(['Confirm Password field must be the same as the Password field && upload photos of file type .jpg, .jpeg or .png ']);
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
   };
 
   return (
     <div className="SignUpContainer">
       <form className="SignUpForm" onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        <ul className="errors">
+          {errors.map((error, idx) => <li key={`error_${idx}`}>{error}</li>)}
         </ul>
+        All fields are required*
         <label>
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -49,6 +56,7 @@ function SignupFormPage({modalState}) {
           <input
             type="text"
             value={username}
+            required
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
@@ -57,6 +65,7 @@ function SignupFormPage({modalState}) {
           <input
             type="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
@@ -65,6 +74,7 @@ function SignupFormPage({modalState}) {
           <input
             type="password"
             value={confirmPassword}
+            required
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </label>
@@ -73,16 +83,16 @@ function SignupFormPage({modalState}) {
           <input
             type="text"
             value={city}
+            required
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
         <label>
           Profile Photo
           <input
-            type="url"
-            value={profilePhotoURL}
-            placeholder="Image URL"
-            onChange={(e) => setProfilePhotoURL(e.target.value)}
+            type="file"
+            required
+            onChange={updateFile}
           />
         </label>
         <div className="signUpButtonDiv">

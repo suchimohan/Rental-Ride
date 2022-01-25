@@ -8,8 +8,7 @@ import CarImage from './CarImage';
 import './CompleteCarDetails.css'
 import { useHistory } from "react-router";
 import Reviews from './Reviews';
-
-
+import {SmallMapContainer} from "../Map/SmallMapsIndex";
 
 function CompleteCarDetails(){
     const sessionUser = useSelector(state => state.session.user)
@@ -65,18 +64,13 @@ function CompleteCarDetails(){
     return (
         <div className="complete_car_details">
             <div className="twoCarDiv">
-                {oneCar?.Images?.map(({id, imageURL})=>(
-                    <CarImage
-                        key={id}
-                        url={imageURL}
-                    />
-                ))}
+                <CarImage images={oneCar?.Images} />
             </div>
             <div className="car_user_div">
                 <img className="profilePhoto" src={oneCar?.User?.profilePhotoURL} alt="" />
                 <div className="car_user_name">
                     <span className="hostName">Hosted By {oneCar?.User?.username}</span>
-                    <span className="hostName">{oneCar?.User?.city}</span>
+                    <span className="hostName">{oneCar?.city}</span>
                 </div>
             </div>
             <div className="displayDetails">
@@ -86,6 +80,8 @@ function CompleteCarDetails(){
                 <span className="other_titles">Features : {oneCar.features}</span>
                 <span className="other_titles">Rules: {oneCar.rules}</span>
                 <span className="other_titles">Price: ${oneCar.price}/ day</span>
+                <span className="other_titles">Pickup Location: ${oneCar.pickup_address}</span>
+                <span><SmallMapContainer car={oneCar}/></span>
             </div>
             {sessionLinks}
             <div className="display_reviews">

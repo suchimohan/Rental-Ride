@@ -8,10 +8,19 @@
 
 .nameTag {
   margin-top: 30px ;
+  margin-left: 200px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 3em;
-  background-color: #f8edeb;
-  font-family: cursive;
+  font-weight: bold;
+}
+
+.tagline{
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3em;
+  font-weight: bold;
 }

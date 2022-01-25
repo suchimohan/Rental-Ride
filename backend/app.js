@@ -14,6 +14,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Security Middleware
@@ -35,6 +36,8 @@ app.use(
         sameSite: isProduction && "Lax",
         httpOnly: true,
       },
+      // disable CSRF token for testing with postman
+      // ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'PUT']
     })
 );
 
