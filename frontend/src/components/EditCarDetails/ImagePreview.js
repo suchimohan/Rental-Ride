@@ -1,26 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 
-const ImagePreview = ({images,deletedImgIds, setDeletedImageIds}) => {
-
-const [list,setList] = useState(images)
-const [rerender, setRerender] = useState()
-const [count, setCount] = useState(1)
+const ImagePreview = ({images, setImages, deletedImgIds, setDeletedImageIds}) => {
 
 const removeImage = (id,index,e) => {
     e.preventDefault()
     setDeletedImageIds([...deletedImgIds,id])
-    let newList = list;
+    let newList = images;
     newList.splice(index,1)
-    setList(newList);
-    setRerender(false)
-    setCount(count+1)
+    setImages(newList);
 }
 
 useEffect(() => {
-    setRerender(!rerender)
-  }, [count]);
+    let ignoredCountCopy = images
+  }, [images]);
 
-    if (!list) {
+    if (!images) {
         return (
             <p>No images</p>
         )
@@ -28,7 +22,7 @@ useEffect(() => {
 
     return (
         <div className="images-preview-container">
-            {list.map((ele,index) => (
+            {images.map((ele,index) => (
                 <div className="image-preview-box" key={`imagepreview-${ele.id}`} id={ele.id}>
                     <img
                     className="preview-image"

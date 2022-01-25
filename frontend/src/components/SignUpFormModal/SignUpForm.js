@@ -39,7 +39,7 @@ function SignupFormPage({modalState}) {
     <div className="SignUpContainer">
       <form className="SignUpForm" onSubmit={handleSubmit}>
         <ul className="errors">
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {errors.map((error, idx) => <li key={`error_${idx}`}>{error}</li>)}
         </ul>
         All fields are required*
         <label>
@@ -93,7 +93,6 @@ function SignupFormPage({modalState}) {
             type="file"
             required
             onChange={updateFile}
-            required
           />
         </label>
         <div className="signUpButtonDiv">

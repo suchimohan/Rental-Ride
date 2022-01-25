@@ -139,11 +139,9 @@ router.put('/:id(\\d+)',multipleMulterUpload("newImages"),handleValidationErrors
                 const image = await Image.findByPk(deletedImgIds[i])
                 if(image){
                     await image.destroy();
-                    res.status(204).end;
                 }
             }
         }
-
 
         if(carImageUrls && carImageUrls.length !== 0) {
             for(let i=0; i<carImageUrls.length; i++){

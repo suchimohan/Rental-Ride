@@ -36,6 +36,8 @@ app.use(
         sameSite: isProduction && "Lax",
         httpOnly: true,
       },
+      // disable CSRF token for testing with postman
+      // ignoreMethods: ['GET', 'HEAD', 'OPTIONS', 'PUT']
     })
 );
 
