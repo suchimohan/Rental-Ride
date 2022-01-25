@@ -18,7 +18,7 @@ const CreateCar = () =>{
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
     const [images,setImages] = useState([])
-    const [errors, setErrors] = useState('')
+    const [errors, setErrors] = useState([])
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -34,7 +34,7 @@ const CreateCar = () =>{
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let newErrors = []
     if (
             name=== "" ||
             model=== "" ||
@@ -50,17 +50,18 @@ const CreateCar = () =>{
             longitude=== "" ||
             images.length === 0
     ) {
-        setErrors('Please fill out all fields and upload few photos of file type .jpg, .jpeg or .png')
+        newErrors.push('Please fill out all fields and upload few photos of file type .jpg, .jpeg or .png')
     }
     if(images.length){
         for(let i=0; i<images.length; i++){
                 let image = images[i]
                 if (!image.name.match(/\.(jpg|jpeg|png)$/)){
-                    setErrors('Please upload few photos of file type .jpg, .jpeg or .png ')
+                    newErrors.push('Please upload few photos of file type .jpg, .jpeg or .png ')
                 }
             }
     }
-
+        setErrors(newErrors);
+        if(newErrors.length === 0) {
         const payload = {
             name,
             model,
@@ -81,7 +82,7 @@ const CreateCar = () =>{
     if (createdCar) {
     history.push(`/car/${createdCar.id}`);
     }
-}
+}}
 
 
     return (
@@ -89,7 +90,7 @@ const CreateCar = () =>{
             <h2>List your car details</h2>
             <form onSubmit={handleSubmit} className='add-car'>
                 <ul className="errors">
-                    {errors && (<li>{errors}</li>)}
+                    {errors.map((error,idx)=> <li key={`error_${idx}`}>{error}</li>)}
                 </ul>
                 All fields are required*
                 <input

@@ -141,13 +141,13 @@ function EditCarDetails() {
                     <input
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-
+                        required
                     />
                     <label> Model</label>
                     <input
                         value={model}
                         onChange={(e) => setModel(e.target.value)}
-
+                        required
                     />
                     <label> Number of Seats  </label>
                     <input
