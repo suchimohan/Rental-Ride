@@ -52,15 +52,15 @@ const CreateCar = () =>{
     ) {
         setErrors('Please fill out all fields and upload few photos of file type .jpg, .jpeg or .png')
     }
-    // else if (images.length){
-    //     for(let i=0; i<images.length; i++){
-    //         let image = images[i]
-    //         if (!image.endsWith(".jpg") && !image.endsWith(".jpeg") && !image.endsWith(".png")){
-    //             setErrors('Please fill out all fields and upload few photos of file type .jpg, .jpeg or .png ')
-    //         }
-    //     }
-    // }
-    else {
+    if(images.length){
+        for(let i=0; i<images.length; i++){
+                let image = images[i]
+                if (!image.name.match(/\.(jpg|jpeg|png)$/)){
+                    setErrors('Please upload few photos of file type .jpg, .jpeg or .png ')
+                }
+            }
+    }
+
         const payload = {
             name,
             model,
@@ -75,22 +75,20 @@ const CreateCar = () =>{
             latitude,
             longitude,
             images
-            // image1,
-            // image2
         }
 
     let createdCar = await dispatch(addOneCar(payload));
     if (createdCar) {
     history.push(`/car/${createdCar.id}`);
     }
-    }
-    }
+}
+
 
     return (
         <div className='add-Car-Div'>
             <h2>List your car details</h2>
             <form onSubmit={handleSubmit} className='add-car'>
-                <ul>
+                <ul className="errors">
                     {errors && (<li>{errors}</li>)}
                 </ul>
                 All fields are required*

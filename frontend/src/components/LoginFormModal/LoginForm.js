@@ -24,16 +24,18 @@ function LoginForm({modalState}) {
   return (
     <div className="loginContainer">
       <form className="loginForm" onSubmit={handleSubmit}>
-        <ul>
+        <ul className="errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
+        All fields are required*
         <label className="loginLabel1">
           Username or Email
           <input
             type="text"
             value={credential}
+            required
             onChange={(e) => setCredential(e.target.value)}
           />
         </label>
@@ -42,6 +44,7 @@ function LoginForm({modalState}) {
           <input
             type="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>

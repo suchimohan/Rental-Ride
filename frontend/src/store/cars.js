@@ -96,10 +96,38 @@ export const deleteCar = id => async (dispatch) => {
 }
 
 export const editCar = (payload, id) => async (dispatch) => {
+    const {name, model, numberOfSeats, features, rules, fuelType, licensePlateNumber, price,
+        pickup_address, city, latitude, longitude,deletedImgIds,newImages } = payload
+    const formData = new FormData();
+    formData.append("name",name);
+    formData.append("model",model);
+    formData.append("numberOfSeats",numberOfSeats);
+    formData.append("features",features);
+    formData.append("rules",rules);
+    formData.append("fuelType",fuelType);
+    formData.append("licensePlateNumber",licensePlateNumber);
+    formData.append("price",price);
+    formData.append("pickup_address",pickup_address);
+    formData.append("city",city);
+    formData.append("latitude",latitude);
+    formData.append("longitude",longitude);
+
+    if (deletedImgIds && deletedImgIds.length !== 0){
+        for (let i = 0; i < deletedImgIds.length; i++) {
+            formData.append("deletedImgIds[]",deletedImgIds[i]);
+        }
+    }
+
+    if (newImages && newImages.length !== 0) {
+        for (let i = 0; i < newImages.length; i++) {
+          formData.append("newImages", newImages[i]);
+        }
+      }
+
     const response = await csrfFetch(`/api/cars/${id}`,{
         method: "PUT",
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
+        headers: {'Content-Type':"multipart/form-data"},
+        body: formData,
     })
     if(response.ok) {
         const newCar = await response.json();

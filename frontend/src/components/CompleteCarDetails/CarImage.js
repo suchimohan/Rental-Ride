@@ -1,9 +1,15 @@
-function CarImage({url}){
-    if(!url) {
+import Carousel from 'react-elastic-carousel';
+
+function CarImage({images}){
+    if(!images) {
         return null
     } else {
     return(
-        <img src={url} alt=""></img>
+        <Carousel>
+            {images.map(image =>
+            <img key ={`imageItem-${image.id}`} src={image.imageURL} alt="" />
+            )}
+        </Carousel>
     )
 }}
 

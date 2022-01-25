@@ -64,12 +64,7 @@ function CompleteCarDetails(){
     return (
         <div className="complete_car_details">
             <div className="twoCarDiv">
-                {oneCar?.Images?.map(({id, imageURL})=>(
-                    <CarImage
-                        key={id}
-                        url={imageURL}
-                    />
-                ))}
+                <CarImage images={oneCar?.Images} />
             </div>
             <div className="car_user_div">
                 <img className="profilePhoto" src={oneCar?.User?.profilePhotoURL} alt="" />

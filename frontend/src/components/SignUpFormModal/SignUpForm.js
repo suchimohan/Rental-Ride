@@ -19,7 +19,7 @@ function SignupFormPage({modalState}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    if (password === confirmPassword && (image.name.match(/\.(jpg|jpeg|png)$/))){
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password,city,image}))
         .catch(async (res) => {
@@ -27,7 +27,7 @@ function SignupFormPage({modalState}) {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors(['Confirm Password field must be the same as the Password field && upload photos of file type .jpg, .jpeg or .png ']);
   };
 
   const updateFile = (e) => {
@@ -38,15 +38,17 @@ function SignupFormPage({modalState}) {
   return (
     <div className="SignUpContainer">
       <form className="SignUpForm" onSubmit={handleSubmit}>
-        <ul>
+        <ul className="errors">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
+        All fields are required*
         <label>
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </label>
         <label>
@@ -54,6 +56,7 @@ function SignupFormPage({modalState}) {
           <input
             type="text"
             value={username}
+            required
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
@@ -62,6 +65,7 @@ function SignupFormPage({modalState}) {
           <input
             type="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
@@ -70,6 +74,7 @@ function SignupFormPage({modalState}) {
           <input
             type="password"
             value={confirmPassword}
+            required
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </label>
@@ -78,6 +83,7 @@ function SignupFormPage({modalState}) {
           <input
             type="text"
             value={city}
+            required
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
@@ -85,6 +91,7 @@ function SignupFormPage({modalState}) {
           Profile Photo
           <input
             type="file"
+            required
             onChange={updateFile}
             required
           />

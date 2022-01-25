@@ -33,3 +33,7 @@ input {
     font-size: large;
     background-color: #D8E2DC;
 }
+
+.errors{
+    color: red
+}

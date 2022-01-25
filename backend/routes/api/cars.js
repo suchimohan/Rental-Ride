@@ -80,11 +80,6 @@ router.post('/',multipleMulterUpload("images"), handleValidationErrors,restoreUs
         imageURL : profileImageUrls[i]
     })}
 
-    // const newImage2 = await Image.create({
-    //     carId : car.id,
-    //     imageURL : image2
-    // })
-
     let newCar = await getCarDetails(car.id)
 
     return res.json(newCar);
@@ -101,7 +96,7 @@ router.get('/:id(\\d+)', asyncHandler(async function (req, res, next){
     }
 }))
 
-router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.put('/:id(\\d+)',multipleMulterUpload("newImages"),handleValidationErrors, asyncHandler(async (req, res, next) => {
     const carId = req.params.id
     const {
         name,
@@ -112,17 +107,18 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
         fuelType,
         licensePlateNumber,
         price,
-        image1,
-        image2
+        pickup_address,
+        city,
+        latitude,
+        longitude,
+        deletedImgIds
     } = req.body
 
-    const car = await Car.findByPk(carId);
-    const oldImage = await Image.findAll({
-        where : {
-            carId: carId
-        }});
+    const carImageUrls = await multiplePublicFileUpload(req.files)
 
-    if(car && oldImage) {
+    const car = await Car.findByPk(carId);
+
+    if(car) {
         let newCar = await car.update({
             name,
             model,
@@ -131,17 +127,33 @@ router.put('/:id(\\d+)', asyncHandler(async (req, res, next) => {
             rules,
             fuelType,
             licensePlateNumber,
-            price
+            price,
+            pickup_address,
+            city,
+            latitude,
+            longitude,
         })
-        let newImage1 = await oldImage[0].update({
-            imageURL : image1
-        })
-        let newImage2 = await oldImage[1].update({
-            imageURL : image2
-        })
+
+        if(deletedImgIds && deletedImgIds.length !==0) {
+            for(let i=0;i<deletedImgIds.length;i++){
+                const image = await Image.findByPk(deletedImgIds[i])
+                if(image){
+                    await image.destroy();
+                    res.status(204).end;
+                }
+            }
+        }
+
+
+        if(carImageUrls && carImageUrls.length !== 0) {
+            for(let i=0; i<carImageUrls.length; i++){
+                const newImage = await Image.create({
+                    carId : car.id,
+                    imageURL : carImageUrls[i]
+            })}
+        }
 
         const updatedCar = await getCarDetails(carId)
-
         return res.json(updatedCar)
     } else {
         let error = carNotFoundError(carId);
