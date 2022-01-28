@@ -12,7 +12,7 @@
     gap : 10px;
 }
 
-input {
+.loginForm input {
     box-sizing:border-box;
     width: 350px;
 }

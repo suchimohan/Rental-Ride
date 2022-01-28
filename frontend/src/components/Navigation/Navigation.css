@@ -1,26 +1,43 @@
+.headerDiv{
+    border-bottom: solid lightgray 1px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 .navigation{
     display: flex;
     flex-direction: row;
     justify-content: center;
     list-style: none;
-    background:#D8E2DC;
-    padding: 20px;
-    gap: 500px
+    padding: 10px;
+    gap: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .searchForm{
-    width: 400px;
+    width: 500px;
     height: 50px;
     border-radius: 10px;
     background-color: #f8edeb;
     border-width: 1px;
+    padding-left: 10px;
+}
+
+.nav2 {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .rental-ride{
-    margin-top: none;
+    margin-top:5px;
     padding-top: none;
     font-weight:bolder;
-    font-size:2em !important
+    font-size:1.5em !important
 }
 
 a {
@@ -34,21 +51,6 @@ a:hover{
     text-decoration: underline;
 }
 
-
-.navigationLinks {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-}
-
-.sessionDiv{
-    display: flex;
-    flex-direction: row;
-    gap:50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .hiUser {
     color: black;
     font-size: larger;
@@ -60,11 +62,53 @@ a:hover{
     font-weight: bold;
     border-radius: 1em;
     border:none;
-    margin-top: none;
-    padding-top: none;
-    background-color:#D8E2DC;
+    margin-top: none !important;
+    padding-top: none !important;
+    background:none
+
 }
 
 .navButton:hover{
     text-decoration: underline;
+}
+
+.dataResult{
+    position: fixed;
+    width:500px;
+    height: auto;
+    background-color: white;
+    box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    overflow:hidden;
+    overflow-y: auto;
+    display: block;
+
+}
+
+.dataResult .dataItem {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    color: black
+}
+
+.dataItem p {
+    margin-left: 10px;
+}
+
+.dataItem a{
+    width: 100%;
+}
+
+.dataItem a:hover {
+    background-color: lightgray;
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+
+    .searchForm {
+        width: 300px;
+    }
 }

@@ -1,6 +1,6 @@
 import './CityDiv.css'
 
-const cityData = [{"id" : 1, "name" : "New York", "image" : "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9ya3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
+export const cityData = [{"id" : 1, "name" : "New York", "image" : "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIweW9ya3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"},
                 {"id" : 2, "name": "Seattle" , "image" : "https://media.istockphoto.com/photos/summer-seattle-picture-id1156820194?b=1&k=20&m=1156820194&s=170667a&w=0&h=QrPqTLHXOAWwi7Lzse0qhzjk8dUB4ZUVUOchH-0AAAs="},
                 {"id": 3, "name" : "San Francisco", "image" : "https://media.istockphoto.com/photos/san-francisco-skyline-with-oakland-bay-bridge-at-sunset-california-picture-id1136437406?b=1&k=20&m=1136437406&s=170667a&w=0&h=wkSwE70gUpdL_meD77l_HqgcxjfZkRE9WsPzUzMBHJ8="},
                 {"id": 4, "name" : "Las Vegas", "image": "https://media.istockphoto.com/photos/aerial-view-of-las-vegas-strip-in-nevada-picture-id621843450?b=1&k=20&m=621843450&s=170667a&w=0&h=semauQCoQ5EiFhuLOEFAQGlDwkafw1_Gaf4nBWbVy0o="},
@@ -11,7 +11,7 @@ const CityDiv = () => {
 
     return (
         <div className="cityContainer">
-             <h1>Popular Cities</h1>
+             <div className="citynameTag">Popular Cities</div>
             <div className="cityCard">
                         {(cityData.map(cityDetails =>{
                             return (

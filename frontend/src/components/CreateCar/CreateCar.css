@@ -1,9 +1,11 @@
 .add-car{
     margin-top: 10px;
     margin-bottom: 50px;
+    margin-left: 25%;
+    margin-right: 25%;
     display: flex;
     flex-direction: column;
-    gap: 20px
+    gap: 20px;
 }
 
 .add-Car-Div .submit-button{
@@ -26,4 +28,3 @@
     height: 40px;
     width: 450px;
 }
-
