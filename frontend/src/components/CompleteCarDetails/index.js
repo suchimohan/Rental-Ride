@@ -80,7 +80,7 @@ function CompleteCarDetails(){
                 <span className="other_titles">Features : {oneCar.features}</span>
                 <span className="other_titles">Rules: {oneCar.rules}</span>
                 <span className="other_titles">Price: ${oneCar.price}/ day</span>
-                <span className="other_titles">Pickup Location: ${oneCar.pickup_address}</span>
+                <span className="other_titles">Pickup Location: {oneCar.pickup_address}</span>
                 <span><SmallMapContainer car={oneCar}/></span>
             </div>
             {sessionLinks}

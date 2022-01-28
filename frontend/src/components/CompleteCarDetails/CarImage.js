@@ -7,7 +7,7 @@ function CarImage({images}){
     return(
         <Carousel>
             {images.map(image =>
-            <img key ={`imageItem-${image.id}`} src={image.imageURL} alt="" />
+            <img className='imageCarousal' key ={`imageItem-${image.id}`} src={image.imageURL} alt="" />
             )}
         </Carousel>
     )

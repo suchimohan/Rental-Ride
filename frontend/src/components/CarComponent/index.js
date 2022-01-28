@@ -17,9 +17,8 @@ const CarComponent = () => {
     return (
         <div>
             <div className="tagline">
-                <div>Accelerate your entrepreneurship</div>
-                <div>Start building a small car sharing business with</div>
-                <div>Rental-Ride</div>
+                <span>Accelerate your entrepreneurship, start building</span>
+                <span>a small car sharing business with Rental-Ride</span>
             </div>
             <CityDiv/>
             <div className="nameTag">
